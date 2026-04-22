@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.9.4" sequence="0" timestamp="1776860833287" analysisTimestamp="1776860833287" release="">
+  <Project projectName="hw5_okit (spotbugsMain)">
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/IAccountDataSource.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/IAuthorizationSource.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ServerLogicProxy.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/AccountServer$1.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/IAccountAuthListener.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/AccountSecurity.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$LoggedRequest.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/Server.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/IAccountChangeVerifier.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$LoggedRequestDouble.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$AuthRequest.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ServerStorage.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/AccountServer.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/OperationException.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/OperationResponse.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/Account.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/ApiClient.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/AccountManager.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/Client.class</Jar>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin-bundle/6.7.0/7204497ba4301c828731536947f742295b339ead/javalin-bundle-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.hsqldb/hsqldb/2.7.4/4aad3c109b5b04927d3bc663bf13535f830401ce/hsqldb-2.7.4.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.zaxxer/HikariCP/6.2.1/2d60b91e74ee4ff10fc9a395d10b3b9c7061ef87/HikariCP-6.2.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-simple/2.0.16/56d3d8e59293543780ad35af4ee4a5d9c111a588/slf4j-simple-2.0.16.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.mindrot/jbcrypt/0.4/af7e61017f73abb18ac4e036954f9f28c6366c07/jbcrypt-0.4.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin-testtools/6.7.0/2b6d93cca68729d1c54213a3df8f55173ad930ca/javalin-testtools-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.github.spotbugs/spotbugs-annotations/4.9.8/ca4a2783a6123e67124fd7feb4caccd2e2ac9a73/spotbugs-annotations-4.9.8.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin-context-mock/6.7.0/25823d0a78dbf2e021aac6f77f8eeccec497e34c/javalin-context-mock-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin/6.7.0/71234932cc524cda33bd48638f61ee7242e65ac0/javalin-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin-micrometer/6.7.0/9337dd1f6d6746f463c3bc6ea3372d9d43931bfb/javalin-micrometer-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.18.3/cc57924cccf42fc852081c36215272f84ffcd991/jackson-datatype-jsr310-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.18.3/7fa21cf7da4598f8240e4ebd9779249622af1acd/jackson-annotations-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.18.3/78f80c259268200e588aa204dd97ecf09b76916e/jackson-core-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-kotlin/2.18.3/d79c117605fc157ec32ec9774690bb3e493938ce/jackson-module-kotlin-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.18.3/537e3886263e3b3464385040453e92567fd509e2/jackson-databind-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.aayushatharva.brotli4j/brotli4j/1.18.0/7432f4b2837bfa4e33d325dacb0e9c63acbfdad8/brotli4j-1.18.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.http2/http2-server/11.0.25/dcf2de9e262a1790a9bc162f52a095d8d41a92b4/http2-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-alpn-conscrypt-server/11.0.25/d476ab0266c8af135fd42b7ca31709b95198a198/jetty-alpn-conscrypt-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.5.18/fc371f3fc97a639de2d67947cffb7518ec5e3d40/logback-classic-1.5.18.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-jvm/5.3.0/6c64103d4b99cf95a4498872adc1075de580a30b/okhttp-jvm-5.3.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.8.10/1e90b778ea4669b6bcbfaca57313665ddd804779/kotlin-reflect-1.8.10.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.9.25/1c166692314a2639e5edfed0d23ed7eee4a5c7a5/kotlin-stdlib-jdk7-1.9.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.16.2/243d8d1d6fce5571f38bda712b3caf8759b4af93/okio-jvm-3.16.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.2.21/fa374a986e128314c3db00a20aae55f72a258511/kotlin-stdlib-2.2.21.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.9.25/20d44e880a284f7b5cd99dd69450b403073f49b2/kotlin-stdlib-jdk8-1.9.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-jetty11/1.14.5/4c12aecb01aea11cc359febdf8f9f84c9d893c3d/micrometer-jetty11-1.14.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-alpn-server/11.0.25/ccc6317d27a1091f2e9d53d43c17fa2a44dab296/jetty-alpn-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-jetty-server/11.0.25/f63a80e8bc8382c144861ec6082d19c35ab9bd/websocket-jetty-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-webapp/11.0.25/7108ebdcb7733160412e3fc1a62d770f3b187a06/jetty-webapp-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-servlet/11.0.25/b2ebfdba12d4f759c145844d33673223ae08c03f/websocket-servlet-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-servlet/11.0.25/76a1ea0dcd771797ce3c230809918f5a91e9b80f/jetty-servlet-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-security/11.0.25/1698e2bcf1dd06785ded55fd4346bb9adafd64b6/jetty-security-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-core-server/11.0.25/15caaae160f2bb2e09d8c1ccb1e0c6ec0a810cb/websocket-core-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-server/11.0.25/851d4e5d920bc14ba8e00117add2b37f4c1ce96/jetty-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.http2/http2-common/11.0.25/9d486943edf74343cddffbd1da700e6bae02d3b8/http2-common-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.http2/http2-hpack/11.0.25/2894216f15307bbbea95cae529ea6b3d5769c537/http2-hpack-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-jetty-common/11.0.25/b612bcbed296d6bc12342af1dbb2d14bcd8fc312/websocket-jetty-common-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-core-common/11.0.25/858d3ca207eee79f4844b33971eee0a58657e532/websocket-core-common-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-http/11.0.25/1c33e326c11d9db04b134d070d600418f818809d/jetty-http-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-io/11.0.25/175602210a8b3fe4a8cc55c07d4b2041daff70e/jetty-io-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-xml/11.0.25/8a2fccd09bd5b45d1acddda2a705ab537179353b/jetty-xml-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-util/11.0.25/1f725375a296fed1ec126125165c5d7ae7629437/jetty-util-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/2.0.17/d9e58ac9c7779ba3bf8142aff6c830617a7fe60f/slf4j-api-2.0.17.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.toolchain/jetty-jakarta-servlet-api/5.0.2/27fce6d666a203526236d33d00e202a4136230f/jetty-jakarta-servlet-api-5.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-core/1.14.5/219117417c2893a62bfe84ea70c4ef8d1ea2da5e/micrometer-core-1.14.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.aayushatharva.brotli4j/service/1.18.0/f247218f11e6f9a281d143e7a9d296d4be035356/service-1.18.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.conscrypt/conscrypt-openjdk-uber/2.5.2/d858f142ea189c62771c505a6548d8606ac098fe/conscrypt-openjdk-uber-2.5.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.5.18/6c0375624f6f36b4e089e2488ba21334a11ef13f/logback-core-1.5.18.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-jetty-api/11.0.25/e2fd6363f3c6073eb783e4342309ae64a63ecc27/websocket-jetty-api-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-observation/1.14.5/b23dff6bf07a29f67fdae8f3f3f8f1c78fa7b126/micrometer-observation-1.14.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-commons/1.14.5/6201a40489ccedc9539c5f7a2c84e9e64702bf10/micrometer-commons-1.14.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</AuxClasspathEntry>
+    <SrcDir>/Users/vasilisagolikova/IdeaProjects/hw5_okit/src/main/resources</SrcDir>
+    <SrcDir>/Users/vasilisagolikova/IdeaProjects/hw5_okit/src/main</SrcDir>
+  </Project>
+  <BugInstance type="DMI_RANDOM_USED_ONLY_ONCE" priority="1" rank="14" abbrev="DMI" category="BAD_PRACTICE" instanceHash="5520d30653e7b16bd8bbeed9ae14a054" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="440">
+    <ShortMessage>Random object created and used only once</ShortMessage>
+    <LongMessage>Random object created and used only once in new ru.hse.Account(String)</LongMessage>
+    <Class classname="ru.hse.Account" primary="true">
+      <SourceLine classname="ru.hse.Account" start="8" end="96" sourcefile="Account.java" sourcepath="ru/hse/Account.java" relSourcepath="ru/hse/Account.java">
+        <Message>At Account.java:[lines 8-96]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.Account</Message>
+    </Class>
+    <Method classname="ru.hse.Account" name="&lt;init&gt;" signature="(Ljava/lang/String;)V" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.Account" start="19" end="24" startBytecode="0" endBytecode="211" sourcefile="Account.java" sourcepath="ru/hse/Account.java" relSourcepath="ru/hse/Account.java"/>
+      <Message>In method new ru.hse.Account(String)</Message>
+    </Method>
+    <Method classname="java.util.Random" name="nextDouble" signature="()D" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.util.Random" start="463" end="463" startBytecode="0" endBytecode="65" sourcefile="Random.java" sourcepath="java/util/Random.java"/>
+      <Message>Called method java.util.Random.nextDouble()</Message>
+    </Method>
+    <SourceLine classname="ru.hse.Account" primary="true" start="23" end="23" startBytecode="61" endBytecode="61" sourcefile="Account.java" sourcepath="ru/hse/Account.java" relSourcepath="ru/hse/Account.java">
+      <Message>At Account.java:[line 23]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DMI_RANDOM_USED_ONLY_ONCE" priority="1" rank="14" abbrev="DMI" category="BAD_PRACTICE" instanceHash="80ff4a39d2c686c8aa75d66258a3b438" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="440">
+    <ShortMessage>Random object created and used only once</ShortMessage>
+    <LongMessage>Random object created and used only once in new ru.hse.Account(String)</LongMessage>
+    <Class classname="ru.hse.Account" primary="true">
+      <SourceLine classname="ru.hse.Account" start="8" end="96" sourcefile="Account.java" sourcepath="ru/hse/Account.java" relSourcepath="ru/hse/Account.java">
+        <Message>At Account.java:[lines 8-96]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.Account</Message>
+    </Class>
+    <Method classname="ru.hse.Account" name="&lt;init&gt;" signature="(Ljava/lang/String;)V" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.Account" start="19" end="24" startBytecode="0" endBytecode="211" sourcefile="Account.java" sourcepath="ru/hse/Account.java" relSourcepath="ru/hse/Account.java"/>
+      <Message>In method new ru.hse.Account(String)</Message>
+    </Method>
+    <Method classname="java.util.Random" name="nextLong" signature="()J" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.util.Random" start="357" end="357" startBytecode="0" endBytecode="60" sourcefile="Random.java" sourcepath="java/util/Random.java"/>
+      <Message>Called method java.util.Random.nextLong()</Message>
+    </Method>
+    <SourceLine classname="ru.hse.Account" primary="true" start="23" end="23" startBytecode="54" endBytecode="54" sourcefile="Account.java" sourcepath="ru/hse/Account.java" relSourcepath="ru/hse/Account.java">
+      <Message>At Account.java:[line 23]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="US_USELESS_SUPPRESSION_ON_METHOD" priority="2" rank="17" abbrev="US" category="STYLE" instanceHash="e440fa9e898313d29ba6be7c7f7bed89" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Useless suppression on a method</ShortMessage>
+    <LongMessage>Suppressing annotation SECOBDES on the method ru.hse.OperationResponse.responceFromString(String) is unnecessary</LongMessage>
+    <Class classname="ru.hse.OperationResponse" primary="true">
+      <SourceLine classname="ru.hse.OperationResponse" start="21" end="152" sourcefile="OperationResponse.java" sourcepath="ru/hse/OperationResponse.java" relSourcepath="ru/hse/OperationResponse.java">
+        <Message>At OperationResponse.java:[lines 21-152]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.OperationResponse</Message>
+    </Class>
+    <Method classname="ru.hse.OperationResponse" name="responceFromString" signature="(Ljava/lang/String;)Ljava/lang/Object;" isStatic="true" primary="true" classAnnotationNames="edu.umd.cs.findbugs.annotations.SuppressFBWarnings">
+      <SourceLine classname="ru.hse.OperationResponse" start="148" end="152" startBytecode="0" endBytecode="122" sourcefile="OperationResponse.java" sourcepath="ru/hse/OperationResponse.java" relSourcepath="ru/hse/OperationResponse.java" synthetic="true"/>
+      <Message>In method ru.hse.OperationResponse.responceFromString(String)</Message>
+    </Method>
+    <String value="SECOBDES ">
+      <Message>Value SECOBDES </Message>
+    </String>
+    <SourceLine classname="ru.hse.OperationResponse" start="148" end="152" startBytecode="0" endBytecode="122" sourcefile="OperationResponse.java" sourcepath="ru/hse/OperationResponse.java" relSourcepath="ru/hse/OperationResponse.java" synthetic="true">
+      <Message>At OperationResponse.java:[lines 148-152]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="CT_CONSTRUCTOR_THROW" priority="2" rank="16" abbrev="CT" category="BAD_PRACTICE" instanceHash="e5c46a918e2ee75cf1fd3b1fcf000cae" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Be wary of letting constructors throw exceptions.</ShortMessage>
+    <LongMessage>Exception thrown in class ru.hse.client.AccountManager at new ru.hse.client.AccountManager(IAuthorizationSource, IAccountDataSource) will leave the constructor. The object under construction remains partially initialized and may be vulnerable to Finalizer attacks.</LongMessage>
+    <Class classname="ru.hse.client.AccountManager" primary="true">
+      <SourceLine classname="ru.hse.client.AccountManager" start="20" end="236" sourcefile="AccountManager.java" sourcepath="ru/hse/client/AccountManager.java" relSourcepath="ru/hse/client/AccountManager.java">
+        <Message>At AccountManager.java:[lines 20-236]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.client.AccountManager</Message>
+    </Class>
+    <Method classname="ru.hse.client.AccountManager" name="&lt;init&gt;" signature="(Lru/hse/IAuthorizationSource;Lru/hse/IAccountDataSource;)V" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.client.AccountManager" start="27" end="29" startBytecode="0" endBytecode="140" sourcefile="AccountManager.java" sourcepath="ru/hse/client/AccountManager.java" relSourcepath="ru/hse/client/AccountManager.java"/>
+      <Message>In method new ru.hse.client.AccountManager(IAuthorizationSource, IAccountDataSource)</Message>
+    </Method>
+    <SourceLine classname="ru.hse.client.AccountManager" primary="true" start="28" end="28" startBytecode="51" endBytecode="51" sourcefile="AccountManager.java" sourcepath="ru/hse/client/AccountManager.java" relSourcepath="ru/hse/client/AccountManager.java">
+      <Message>At AccountManager.java:[line 28]</Message>
+    </SourceLine>
+    <SourceLine classname="ru.hse.client.AccountManager" start="28" end="28" startBytecode="51" endBytecode="51" sourcefile="AccountManager.java" sourcepath="ru/hse/client/AccountManager.java" relSourcepath="ru/hse/client/AccountManager.java">
+      <Message>At AccountManager.java:[line 28]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="EI_EXPOSE_REP2" priority="2" rank="18" abbrev="EI2" category="MALICIOUS_CODE" instanceHash="acd9efa221a1482f2bc5118e0f7fde0e" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="374">
+    <ShortMessage>May expose internal representation by incorporating reference to mutable object</ShortMessage>
+    <LongMessage>new ru.hse.server.AccountSecurity(AccountServer, ServerStorage) may expose internal representation by storing an externally mutable object into AccountSecurity.data</LongMessage>
+    <Class classname="ru.hse.server.AccountSecurity" primary="true">
+      <SourceLine classname="ru.hse.server.AccountSecurity" start="11" end="48" sourcefile="AccountSecurity.java" sourcepath="ru/hse/server/AccountSecurity.java" relSourcepath="ru/hse/server/AccountSecurity.java">
+        <Message>At AccountSecurity.java:[lines 11-48]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.server.AccountSecurity</Message>
+    </Class>
+    <Method classname="ru.hse.server.AccountSecurity" name="&lt;init&gt;" signature="(Lru/hse/server/AccountServer;Lru/hse/server/ServerStorage;)V" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.server.AccountSecurity" start="14" end="17" startBytecode="0" endBytecode="118" sourcefile="AccountSecurity.java" sourcepath="ru/hse/server/AccountSecurity.java" relSourcepath="ru/hse/server/AccountSecurity.java"/>
+      <Message>In method new ru.hse.server.AccountSecurity(AccountServer, ServerStorage)</Message>
+    </Method>
+    <Field classname="ru.hse.server.AccountSecurity" name="data" signature="Lru/hse/server/ServerStorage;" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.server.AccountSecurity" sourcefile="AccountSecurity.java" sourcepath="ru/hse/server/AccountSecurity.java" relSourcepath="ru/hse/server/AccountSecurity.java">
+        <Message>In AccountSecurity.java</Message>
+      </SourceLine>
+      <Message>Field ru.hse.server.AccountSecurity.data</Message>
+    </Field>
+    <LocalVariable name="data" register="2" pc="33" role="LOCAL_VARIABLE_NAMED">
+      <Message>Local variable named data</Message>
+    </LocalVariable>
+    <SourceLine classname="ru.hse.server.AccountSecurity" primary="true" start="16" end="16" startBytecode="33" endBytecode="33" sourcefile="AccountSecurity.java" sourcepath="ru/hse/server/AccountSecurity.java" relSourcepath="ru/hse/server/AccountSecurity.java">
+      <Message>At AccountSecurity.java:[line 16]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="URF_UNREAD_FIELD" priority="2" rank="18" abbrev="UrF" category="PERFORMANCE" instanceHash="c9439258572ba1e3820a28ba7811223d" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="563">
+    <ShortMessage>Unread field</ShortMessage>
+    <LongMessage>Unread field: ru.hse.server.AccountSecurity.maxChange</LongMessage>
+    <Class classname="ru.hse.server.AccountSecurity" primary="true">
+      <SourceLine classname="ru.hse.server.AccountSecurity" start="11" end="48" sourcefile="AccountSecurity.java" sourcepath="ru/hse/server/AccountSecurity.java" relSourcepath="ru/hse/server/AccountSecurity.java">
+        <Message>At AccountSecurity.java:[lines 11-48]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.server.AccountSecurity</Message>
+    </Class>
+    <Field classname="ru.hse.server.AccountSecurity" name="maxChange" signature="Ljava/util/Map;" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.server.AccountSecurity" sourcefile="AccountSecurity.java" sourcepath="ru/hse/server/AccountSecurity.java" relSourcepath="ru/hse/server/AccountSecurity.java">
+        <Message>In AccountSecurity.java</Message>
+      </SourceLine>
+      <Message>Field ru.hse.server.AccountSecurity.maxChange</Message>
+    </Field>
+    <SourceLine classname="ru.hse.server.AccountSecurity" primary="true" start="12" end="12" startBytecode="23" endBytecode="23" sourcefile="AccountSecurity.java" sourcepath="ru/hse/server/AccountSecurity.java" relSourcepath="ru/hse/server/AccountSecurity.java">
+      <Message>At AccountSecurity.java:[line 12]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="UL_UNRELEASED_LOCK_EXCEPTION_PATH" priority="2" rank="14" abbrev="UL" category="MT_CORRECTNESS" instanceHash="986d9fa18110737791a3570199a5868f" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="459">
+    <ShortMessage>Method does not release lock on all exception paths</ShortMessage>
+    <LongMessage>ru.hse.server.AccountServer.login(String, String) does not release lock on all exception paths</LongMessage>
+    <Class classname="ru.hse.server.AccountServer" primary="true">
+      <SourceLine classname="ru.hse.server.AccountServer" start="12" end="130" sourcefile="AccountServer.java" sourcepath="ru/hse/server/AccountServer.java" relSourcepath="ru/hse/server/AccountServer.java">
+        <Message>At AccountServer.java:[lines 12-130]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.server.AccountServer</Message>
+    </Class>
+    <Method classname="ru.hse.server.AccountServer" name="login" signature="(Ljava/lang/String;Ljava/lang/String;)Lru/hse/Account;" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.server.AccountServer" start="71" end="94" startBytecode="0" endBytecode="97" sourcefile="AccountServer.java" sourcepath="ru/hse/server/AccountServer.java" relSourcepath="ru/hse/server/AccountServer.java"/>
+      <Message>In method ru.hse.server.AccountServer.login(String, String)</Message>
+    </Method>
+    <SourceLine classname="ru.hse.server.AccountServer" primary="true" start="75" end="75" startBytecode="29" endBytecode="29" sourcefile="AccountServer.java" sourcepath="ru/hse/server/AccountServer.java" relSourcepath="ru/hse/server/AccountServer.java">
+      <Message>At AccountServer.java:[line 75]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="UL_UNRELEASED_LOCK_EXCEPTION_PATH" priority="2" rank="14" abbrev="UL" category="MT_CORRECTNESS" instanceHash="831f6f31f1d671efe1c9cc65d683ccb1" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="459">
+    <ShortMessage>Method does not release lock on all exception paths</ShortMessage>
+    <LongMessage>ru.hse.server.AccountServer.testSession(String, Long) does not release lock on all exception paths</LongMessage>
+    <Class classname="ru.hse.server.AccountServer" primary="true">
+      <SourceLine classname="ru.hse.server.AccountServer" start="12" end="130" sourcefile="AccountServer.java" sourcepath="ru/hse/server/AccountServer.java" relSourcepath="ru/hse/server/AccountServer.java">
+        <Message>At AccountServer.java:[lines 12-130]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.server.AccountServer</Message>
+    </Class>
+    <Method classname="ru.hse.server.AccountServer" name="testSession" signature="(Ljava/lang/String;Ljava/lang/Long;)Lru/hse/Account;" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.server.AccountServer" start="98" end="106" startBytecode="0" endBytecode="35" sourcefile="AccountServer.java" sourcepath="ru/hse/server/AccountServer.java" relSourcepath="ru/hse/server/AccountServer.java"/>
+      <Message>In method ru.hse.server.AccountServer.testSession(String, Long)</Message>
+    </Method>
+    <SourceLine classname="ru.hse.server.AccountServer" primary="true" start="98" end="98" startBytecode="4" endBytecode="4" sourcefile="AccountServer.java" sourcepath="ru/hse/server/AccountServer.java" relSourcepath="ru/hse/server/AccountServer.java">
+      <Message>At AccountServer.java:[line 98]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="526c65944287ecd8635ee6e6ea114f73" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of account, which is known to be non-null in ru.hse.server.ApiServer.lambda$new$2(AccountServer, Context)</LongMessage>
+    <Class classname="ru.hse.server.ApiServer" primary="true">
+      <SourceLine classname="ru.hse.server.ApiServer" start="14" end="200" sourcefile="ApiServer.java" sourcepath="ru/hse/server/ApiServer.java" relSourcepath="ru/hse/server/ApiServer.java">
+        <Message>At ApiServer.java:[lines 14-200]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.server.ApiServer</Message>
+    </Class>
+    <Method classname="ru.hse.server.ApiServer" name="lambda$new$2" signature="(Lru/hse/server/AccountServer;Lio/javalin/http/Context;)V" isStatic="true" primary="true">
+      <SourceLine classname="ru.hse.server.ApiServer" start="35" end="61" startBytecode="0" endBytecode="343" sourcefile="ApiServer.java" sourcepath="ru/hse/server/ApiServer.java" relSourcepath="ru/hse/server/ApiServer.java"/>
+      <Message>In method ru.hse.server.ApiServer.lambda$new$2(AccountServer, Context)</Message>
+    </Method>
+    <LocalVariable name="account" register="3" pc="80" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from account</Message>
+    </LocalVariable>
+    <Method classname="ru.hse.server.AccountServer" name="register" signature="(Ljava/lang/String;Ljava/lang/String;)Lru/hse/Account;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="ru.hse.server.AccountServer" start="46" end="67" startBytecode="0" endBytecode="425" sourcefile="AccountServer.java" sourcepath="ru/hse/server/AccountServer.java" relSourcepath="ru/hse/server/AccountServer.java"/>
+      <Message>Return value of ru.hse.server.AccountServer.register(String, String) of type ru.hse.Account</Message>
+    </Method>
+    <SourceLine classname="ru.hse.server.ApiServer" primary="true" start="48" end="48" startBytecode="81" endBytecode="81" sourcefile="ApiServer.java" sourcepath="ru/hse/server/ApiServer.java" relSourcepath="ru/hse/server/ApiServer.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at ApiServer.java:[line 48]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" priority="2" rank="18" abbrev="RCN" category="STYLE" instanceHash="5f4514748406a3374126a26387f7294d" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Redundant nullcheck of value known to be non-null</ShortMessage>
+    <LongMessage>Redundant nullcheck of account, which is known to be non-null in ru.hse.server.ApiServer.lambda$new$3(AccountServer, Context)</LongMessage>
+    <Class classname="ru.hse.server.ApiServer" primary="true">
+      <SourceLine classname="ru.hse.server.ApiServer" start="14" end="200" sourcefile="ApiServer.java" sourcepath="ru/hse/server/ApiServer.java" relSourcepath="ru/hse/server/ApiServer.java">
+        <Message>At ApiServer.java:[lines 14-200]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.server.ApiServer</Message>
+    </Class>
+    <Method classname="ru.hse.server.ApiServer" name="lambda$new$3" signature="(Lru/hse/server/AccountServer;Lio/javalin/http/Context;)V" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.server.ApiServer" start="65" end="92" startBytecode="0" endBytecode="426" sourcefile="ApiServer.java" sourcepath="ru/hse/server/ApiServer.java" relSourcepath="ru/hse/server/ApiServer.java"/>
+      <Message>In method ru.hse.server.ApiServer.lambda$new$3(AccountServer, Context)</Message>
+    </Method>
+    <LocalVariable name="account" register="4" pc="128" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from account</Message>
+    </LocalVariable>
+    <Method classname="ru.hse.server.AccountServer" name="login" signature="(Ljava/lang/String;Ljava/lang/String;)Lru/hse/Account;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="ru.hse.server.AccountServer" start="71" end="94" startBytecode="0" endBytecode="443" sourcefile="AccountServer.java" sourcepath="ru/hse/server/AccountServer.java" relSourcepath="ru/hse/server/AccountServer.java"/>
+      <Message>Return value of ru.hse.server.AccountServer.login(String, String) of type ru.hse.Account</Message>
+    </Method>
+    <SourceLine classname="ru.hse.server.ApiServer" primary="true" start="79" end="79" startBytecode="130" endBytecode="130" sourcefile="ApiServer.java" sourcepath="ru/hse/server/ApiServer.java" relSourcepath="ru/hse/server/ApiServer.java" role="SOURCE_REDUNDANT_NULL_CHECK">
+      <Message>Redundant null check at ApiServer.java:[line 79]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" instanceHash="7e90057afe501823a970baba4dea9f00" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="173">
+    <ShortMessage>Reliance on default encoding</ShortMessage>
+    <LongMessage>Found reliance on default encoding in ru.hse.server.Server.main(String[]): new java.util.Scanner(InputStream)</LongMessage>
+    <Class classname="ru.hse.server.Server" primary="true">
+      <SourceLine classname="ru.hse.server.Server" start="6" end="56" sourcefile="Server.java" sourcepath="ru/hse/server/Server.java" relSourcepath="ru/hse/server/Server.java">
+        <Message>At Server.java:[lines 6-56]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.server.Server</Message>
+    </Class>
+    <Method classname="ru.hse.server.Server" name="main" signature="([Ljava/lang/String;)V" isStatic="true" primary="true">
+      <SourceLine classname="ru.hse.server.Server" start="30" end="45" startBytecode="0" endBytecode="239" sourcefile="Server.java" sourcepath="ru/hse/server/Server.java" relSourcepath="ru/hse/server/Server.java"/>
+      <Message>In method ru.hse.server.Server.main(String[])</Message>
+    </Method>
+    <Method classname="java.util.Scanner" name="&lt;init&gt;" signature="(Ljava/io/InputStream;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.util.Scanner" start="566" end="567" startBytecode="0" endBytecode="71" sourcefile="Scanner.java" sourcepath="java/util/Scanner.java"/>
+      <Message>Called method new java.util.Scanner(InputStream)</Message>
+    </Method>
+    <SourceLine classname="ru.hse.server.Server" primary="true" start="38" end="38" startBytecode="40" endBytecode="40" sourcefile="Server.java" sourcepath="ru/hse/server/Server.java" relSourcepath="ru/hse/server/Server.java">
+      <Message>At Server.java:[line 38]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="CT_CONSTRUCTOR_THROW" priority="2" rank="16" abbrev="CT" category="BAD_PRACTICE" instanceHash="f4d01604f4d81e7168264bffdf00d381" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Be wary of letting constructors throw exceptions.</ShortMessage>
+    <LongMessage>Exception thrown in class ru.hse.server.ServerStorage at new ru.hse.server.ServerStorage(String) will leave the constructor. The object under construction remains partially initialized and may be vulnerable to Finalizer attacks.</LongMessage>
+    <Class classname="ru.hse.server.ServerStorage" primary="true">
+      <SourceLine classname="ru.hse.server.ServerStorage" start="18" end="286" sourcefile="ServerStorage.java" sourcepath="ru/hse/server/ServerStorage.java" relSourcepath="ru/hse/server/ServerStorage.java">
+        <Message>At ServerStorage.java:[lines 18-286]</Message>
+      </SourceLine>
+      <Message>In class ru.hse.server.ServerStorage</Message>
+    </Class>
+    <Method classname="ru.hse.server.ServerStorage" name="&lt;init&gt;" signature="(Ljava/lang/String;)V" isStatic="false" primary="true">
+      <SourceLine classname="ru.hse.server.ServerStorage" start="18" end="22" startBytecode="0" endBytecode="94" sourcefile="ServerStorage.java" sourcepath="ru/hse/server/ServerStorage.java" relSourcepath="ru/hse/server/ServerStorage.java"/>
+      <Message>In method new ru.hse.server.ServerStorage(String)</Message>
+    </Method>
+    <SourceLine classname="ru.hse.server.ServerStorage" primary="true" start="21" end="21" startBytecode="19" endBytecode="19" sourcefile="ServerStorage.java" sourcepath="ru/hse/server/ServerStorage.java" relSourcepath="ru/hse/server/ServerStorage.java">
+      <Message>At ServerStorage.java:[line 21]</Message>
+    </SourceLine>
+    <SourceLine classname="ru.hse.server.ServerStorage" start="21" end="21" startBytecode="19" endBytecode="19" sourcefile="ServerStorage.java" sourcepath="ru/hse/server/ServerStorage.java" relSourcepath="ru/hse/server/ServerStorage.java">
+      <Message>At ServerStorage.java:[line 21]</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugCategory category="BAD_PRACTICE">
+    <Description>Bad practice</Description>
+  </BugCategory>
+  <BugCategory category="MALICIOUS_CODE">
+    <Description>Malicious code vulnerability</Description>
+  </BugCategory>
+  <BugCategory category="PERFORMANCE">
+    <Description>Performance</Description>
+  </BugCategory>
+  <BugCategory category="STYLE">
+    <Description>Dodgy code</Description>
+  </BugCategory>
+  <BugCategory category="MT_CORRECTNESS">
+    <Description>Multithreaded correctness</Description>
+  </BugCategory>
+  <BugCategory category="I18N">
+    <Description>Internationalization</Description>
+  </BugCategory>
+  <BugPattern type="US_USELESS_SUPPRESSION_ON_METHOD" abbrev="US" category="STYLE">
+    <ShortDescription>Useless suppression on a method</ShortDescription>
+    <Details><![CDATA[
+      <p>
+      Suppressing annotations <code>&amp;SuppressFBWarnings</code> should be removed from the source code as soon as they are no more needed.
+      Leaving them may result in accidental warnings suppression.
+      The annotation was probably added to suppress a warning raised by SpotBugs, but now SpotBugs does not report the bug anymore. Either
+      the bug was solved or SpotBugs was updated, and the bug is no longer raised by that code.
+      The unnecessary annotation is not reported when the class or method is annotated with an <code>&amp;Generated</code> annotation with retention CLASS or RUNTIME.
+      </p>
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="EI_EXPOSE_REP2" abbrev="EI2" category="MALICIOUS_CODE" cweid="374">
+    <ShortDescription>May expose internal representation by incorporating reference to mutable object</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This code stores a reference to an externally mutable object into the
+  internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Storing a copy of the object is better approach in many situations.</p>
+  <p>See <a href="https://cwe.mitre.org/data/definitions/374.html">CWE-374: Passing Mutable Objects to an Untrusted Method</a>.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="DMI_RANDOM_USED_ONLY_ONCE" abbrev="DMI" category="BAD_PRACTICE">
+    <ShortDescription>Random object created and used only once</ShortDescription>
+    <Details><![CDATA[
+
+<p> This code creates a java.util.Random object, uses it to generate one random number, and then discards
+the Random object. This produces mediocre quality random numbers and is inefficient.
+If possible, rewrite the code so that the Random object is created once and saved, and each time a new random number
+is required invoke a method on the existing Random object to obtain it.
+</p>
+
+<p>If it is important that the generated Random numbers not be guessable, you <em>must</em> not create a new Random for each random
+number; the values are too easily guessable. You should strongly consider using a java.security.SecureRandom instead
+(and avoid allocating a new SecureRandom for each random number needed).
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="UL_UNRELEASED_LOCK_EXCEPTION_PATH" abbrev="UL" category="MT_CORRECTNESS" cweid="459">
+    <ShortDescription>Method does not release lock on all exception paths</ShortDescription>
+    <Details><![CDATA[
+
+<p> This method acquires a JSR-166 (<code>java.util.concurrent</code>) lock,
+but does not release it on all exception paths out of the method.  In general, the correct idiom
+for using a JSR-166 lock is:
+</p>
+<pre><code>Lock l = ...;
+l.lock();
+try {
+    // do something
+} finally {
+    l.unlock();
+}
+</code></pre>
+<p>See <a href="https://cwe.mitre.org/data/definitions/413.html">CWE-413: Improper Resource Locking</a>
+and <a href="https://cwe.mitre.org/data/definitions/459.html">CWE-459: Incomplete Cleanup</a>.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="URF_UNREAD_FIELD" abbrev="UrF" category="PERFORMANCE" cweid="563">
+    <ShortDescription>Unread field</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This field is never read.&nbsp; Consider removing it from the class.</p>
+  <p>See <a href="https://cwe.mitre.org/data/definitions/563.html">CWE-563: Assignment to Variable without Use</a>.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="DM_DEFAULT_ENCODING" abbrev="Dm" category="I18N" cweid="173">
+    <ShortDescription>Reliance on default encoding</ShortDescription>
+    <Details><![CDATA[
+
+<p> Found a call to a method which will perform a byte to String (or String to byte) conversion,
+and will assume that the default platform encoding is suitable. This will cause the application
+behavior to vary between platforms. Use an alternative API and specify a charset name or Charset
+object explicitly.</p>
+<p>See <a href="https://cwe.mitre.org/data/definitions/173.html">CWE-173: Improper Handling of Alternate Encoding</a>.
+</p>
+
+      ]]></Details>
+  </BugPattern>
+  <BugPattern type="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" abbrev="RCN" category="STYLE">
+    <ShortDescription>Redundant nullcheck of value known to be non-null</ShortDescription>
+    <Details><![CDATA[
+
+<p> This method contains a redundant check of a known non-null value against
+the constant null.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="CT_CONSTRUCTOR_THROW" abbrev="CT" category="BAD_PRACTICE">
+    <ShortDescription>Be wary of letting constructors throw exceptions.</ShortDescription>
+    <Details><![CDATA[
+      
+            <p>Classes that throw exceptions in their constructors are vulnerable to Finalizer attacks</p>
+
+            <p>A finalizer attack can be prevented, by declaring the class final, using an empty finalizer declared as final, or by a clever use of a private constructor.</p>
+
+            <p>See <a href="https://wiki.sei.cmu.edu/confluence/display/java/OBJ11-J.+Be+wary+of+letting+constructors+throw+exceptions"><code>SEI CERT Rule OBJ-11</code></a>
+            for more information.
+            </p>
+            
+    ]]></Details>
+  </BugPattern>
+  <BugCode abbrev="DMI" cweid="440">
+    <Description>Dubious method invocation</Description>
+  </BugCode>
+  <BugCode abbrev="CT">
+    <Description>Constructor throws</Description>
+  </BugCode>
+  <BugCode abbrev="UL">
+    <Description>Lock not released on all paths</Description>
+  </BugCode>
+  <BugCode abbrev="UrF">
+    <Description>Unread field</Description>
+  </BugCode>
+  <BugCode abbrev="Dm">
+    <Description>Dubious method used</Description>
+  </BugCode>
+  <BugCode abbrev="RCN" cweid="476">
+    <Description>Redundant comparison to null</Description>
+  </BugCode>
+  <BugCode abbrev="US">
+    <Description>Useless suppression</Description>
+  </BugCode>
+  <BugCode abbrev="EI2">
+    <Description>Storing reference to mutable object</Description>
+  </BugCode>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Wed, 22 Apr 2026 15:27:13 +0300" total_classes="0" referenced_classes="0" total_bugs="12" total_size="0" num_packages="3" java_version="17.0.18" vm_version="17.0.18+8" cpu_seconds="4.97" clock_seconds="1.85" peak_mbytes="288.24" alloc_mbytes="4608.00" gc_seconds="0.02" priority_2="9" priority_1="3">
+    <FileStats path="ru/hse/Account.java" bugCount="2" size="0" bugHash="68df5f5abd8510181b731610a86b1aa9"/>
+    <FileStats path="ru/hse/OperationResponse.java" bugCount="1" size="0" bugHash="5d9c6076614cf9b40af4ea0b85cb1ba0"/>
+    <FileStats path="ru/hse/client/AccountManager.java" bugCount="1" size="0" bugHash="776d3dc74d9149f57d177e932c353bd5"/>
+    <FileStats path="ru/hse/server/AccountSecurity.java" bugCount="2" size="0" bugHash="14094d01b41f5634fd425290c4357fae"/>
+    <FileStats path="ru/hse/server/AccountServer.java" bugCount="2" size="0" bugHash="d33108b7efe8ca7ae3aeb82b2119d7d5"/>
+    <FileStats path="ru/hse/server/ApiServer.java" bugCount="2" size="0" bugHash="80e6bd7645984f56757dcf44a2e4db32"/>
+    <FileStats path="ru/hse/server/Server.java" bugCount="1" size="0" bugHash="f96a1acac2736c7c7edceab6d3e4b91a"/>
+    <FileStats path="ru/hse/server/ServerStorage.java" bugCount="1" size="0" bugHash="7cff881f43bfeb5759c06b9190949dce"/>
+    <FindBugsProfile></FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

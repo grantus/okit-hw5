@@ -1,6 +1,7 @@
 package ru.hse.server;
 
 import io.javalin.Javalin;
+import io.javalin.http.Context;
 import ru.hse.Account;
 import ru.hse.OperationException;
 import ru.hse.OperationResponse;
@@ -9,193 +10,170 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 public class ApiServer {
-    private final AccountServer server;
-    private final Javalin app;
-    private final LinkedList<IAccountAuthListener> listenerList =
-            new LinkedList<IAccountAuthListener>();
+  private static final String BAD_AUTH_MESSAGE = "Username и password обязательны";
+  private static final String BAD_SESSION_MESSAGE =
+      "Произошла ошибка при разлогировании. Возможно номер сессии указан некорреткно "
+          + "или аккаунт/сессия не существуют";
 
-    public boolean isStarted;
+  private final AccountServer server;
+  private final Javalin app;
+  private final LinkedList<IAccountAuthListener> listenerList = new LinkedList<>();
 
-    public ApiServer(AccountServer server, int port) {
-        this.server = server;
-        app = Javalin.create(config -> {
-        }).start(port);
+  public ApiServer(AccountServer server, int port) {
+    this.server = server;
+    this.app = Javalin.create(config -> {}).start(port);
+    configureRoutes();
 
-        // ----- Публичные эндпоинты -----
-        app.get(
-                "/",
-                ctx ->
-                        ctx.result(
-                                "Server is online. Possible routes are: /register, /login, /account/logout, /account/withdraw, /account/deposit, /account/balance"));
+    System.out.println("Server is running on http://localhost:" + port);
+  }
 
-        // Регистрация нового пользователя
-        app.post(
-                "/register",
-                ctx -> {
-                    AuthRequest req = ctx.bodyAsClass(AuthRequest.class);
-                    if (req.login == null
-                            || req.password == null
-                            || req.login.isBlank()
-                            || req.password.isBlank()) {
-                        ctx.result(
-                                new OperationResponse(
-                                        OperationResponse.NOT_LOGGED, "Username и password обязательны")
-                                        .toResultString());
-                        return;
-                    }
-                    try {
-                        Account account = server.register(req.login, req.password);
-                        if (account != null)
-                            ctx.result(
-                                    new OperationResponse(OperationResponse.SUCCEED, account.getActiveSession())
-                                            .toResultString());
-                        else
-                            ctx.result(
-                                    new OperationResponse(
-                                            OperationResponse.NOT_LOGGED,
-                                            "Произошла ошибка при регистрации. Возможно аккаунт уже существует")
-                                            .toResultString());
-                    } catch (OperationException ofe) {
-                        ctx.result(ofe.toResultString());
-                    }
-                });
-        app.post(
-                "/login",
-                ctx -> {
-                    AuthRequest req = ctx.bodyAsClass(AuthRequest.class);
-                    if (req.login == null
-                            || req.password == null
-                            || req.login.isBlank()
-                            || req.password.isBlank()) {
-                        ctx.result(
-                                new OperationResponse(
-                                        OperationResponse.NOT_LOGGED, "Username и password обязательны")
-                                        .toResultString());
-                        return;
-                    }
-                    try {
-                        Account account = server.login(req.login, req.password);
-                        for (IAccountAuthListener list : getAuthListeners()) list.accountLogin(req.login);
-                        if (account != null) {
-                            ctx.result(
-                                    new OperationResponse(OperationResponse.SUCCEED, account.getActiveSession())
-                                            .toResultString());
-                        } else
-                            ctx.result(
-                                    new OperationResponse(
-                                            OperationResponse.NOT_LOGGED,
-                                            "Произошла ошибка при регистрации. Возможно аккаунт уже существует")
-                                            .toResultString());
-                    } catch (OperationException ofe) {
-                        ctx.result(ofe.toResultString());
-                    }
-                });
+  public synchronized boolean addAuthListener(IAccountAuthListener list) {
+    return listenerList.add(list);
+  }
 
-        // Выход из системы
-        app.post(
-                "/account/logout",
-                ctx -> {
-                    LoggedRequest req = ctx.bodyAsClass(LoggedRequest.class);
-                    try {
-                        Account acc = server.testSession(req.login, req.session);
-                        if (acc != null) {
-                            server.logout(acc);
-                            for (IAccountAuthListener list : getAuthListeners()) list.accountLogout(req.login);
-                            ctx.req().getSession().invalidate();
-                            ctx.result(Integer.toString(OperationResponse.SUCCEED));
-                        } else
-                            ctx.result(
-                                    new OperationResponse(
-                                            OperationResponse.NOT_LOGGED,
-                                            "Произошла ошибка при разлогировании. Возможно номер сессии указан некорреткно или аккаунт/сессия не существуют")
-                                            .toResultString());
-                    } catch (OperationException ofe) {
-                        ctx.result(ofe.toResultString());
-                    }
-                });
+  public synchronized boolean removeAuthListener(IAccountAuthListener list) {
+    return listenerList.remove(list);
+  }
 
-        app.post(
-                "/account/withdraw",
-                ctx -> {
-                    LoggedRequestDouble req = ctx.bodyAsClass(LoggedRequestDouble.class);
-                    Account acc = server.testSession(req.login, req.session);
-                    if (acc != null) {
-                        OperationResponse res = acc.withdraw(req.amount);
-                        ctx.result(res.toResultString());
-                    } else
-                        ctx.result(
-                                new OperationResponse(
-                                        OperationResponse.NOT_LOGGED,
-                                        "Произошла ошибка при разлогировании. Возможно номер сессии указан некорреткно или аккаунт/сессия не существуют")
-                                        .toResultString());
-                });
-        app.post(
-                "/account/deposit",
-                ctx -> {
-                    LoggedRequestDouble req = ctx.bodyAsClass(LoggedRequestDouble.class);
-                    Account acc = server.testSession(req.login, req.session);
-                    if (acc != null) {
+  public synchronized Collection<IAccountAuthListener> getAuthListeners() {
+    return new LinkedList<>(listenerList);
+  }
 
-                        OperationResponse res = acc.deposit(req.amount);
-                        ctx.result(res.toResultString());
-                    } else
-                        ctx.result(
-                                new OperationResponse(
-                                        OperationResponse.NOT_LOGGED,
-                                        "Произошла ошибка при разлогировании. Возможно номер сессии указан некорреткно или аккаунт/сессия не существуют")
-                                        .toResultString());
-                });
-        app.post(
-                "/account/balance",
-                ctx -> {
-                    LoggedRequestDouble req = ctx.bodyAsClass(LoggedRequestDouble.class);
-                    Account acc = server.testSession(req.login, req.session);
-                    if (acc != null) {
-                        OperationResponse res = acc.getBalance();
-                        ctx.result(res.toResultString());
-                    } else
-                        ctx.result(
-                                new OperationResponse(
-                                        OperationResponse.NOT_LOGGED,
-                                        "Произошла ошибка при разлогировании. Возможно номер сессии указан некорреткно или аккаунт/сессия не существуют")
-                                        .toResultString());
-                });
-        synchronized (this) {
-            isStarted = true;
-            this.notifyAll();
-        }
-        System.out.println("Server is running on http://localhost:"+port);
+  public void stop() {
+    app.stop();
+  }
+
+  private void configureRoutes() {
+    app.get(
+        "/",
+        ctx ->
+            ctx.result(
+                "Server is online. Possible routes are: /register, /login, "
+                    + "/account/logout, /account/withdraw, /account/deposit, "
+                    + "/account/balance"));
+
+    app.post("/register", this::handleRegister);
+    app.post("/login", this::handleLogin);
+    app.post("/account/logout", this::handleLogout);
+    app.post("/account/withdraw", this::handleWithdraw);
+    app.post("/account/deposit", this::handleDeposit);
+    app.post("/account/balance", this::handleBalance);
+  }
+
+  private void handleRegister(Context ctx) {
+    AuthRequest req = ctx.bodyAsClass(AuthRequest.class);
+    if (isValidAuthRequest(req)) {
+      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_AUTH_MESSAGE).toResultString());
+      return;
     }
 
-    public synchronized boolean addAuthListener(IAccountAuthListener list) {
-        return listenerList.add(list);
+    try {
+      Account account = server.register(req.login, req.password);
+      ctx.result(new OperationResponse(OperationResponse.SUCCEED, account.getActiveSession()).toResultString());
+    } catch (OperationException e) {
+      ctx.result(e.toResultString());
+    }
+  }
+
+  private void handleLogin(Context ctx) {
+    AuthRequest req = ctx.bodyAsClass(AuthRequest.class);
+    if (isValidAuthRequest(req)) {
+      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_AUTH_MESSAGE).toResultString());
+      return;
     }
 
-    public synchronized boolean removeAuthListener(IAccountAuthListener list) {
-        return listenerList.remove(list);
+    try {
+      Account account = server.login(req.login, req.password);
+      for (IAccountAuthListener listener : getAuthListeners()) {
+        listener.accountLogin(req.login);
+      }
+      ctx.result(new OperationResponse(OperationResponse.SUCCEED, account.getActiveSession()).toResultString());
+    } catch (OperationException e) {
+      ctx.result(e.toResultString());
+    }
+  }
+
+  private void handleLogout(Context ctx) {
+    LoggedRequest req = ctx.bodyAsClass(LoggedRequest.class);
+    try {
+      Account acc = server.testSession(req.login, req.session);
+      if (acc == null) {
+        ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE).toResultString());
+        return;
+      }
+
+      server.logout(acc);
+      for (IAccountAuthListener listener : getAuthListeners()) {
+        listener.accountLogout(req.login);
+      }
+
+      if (ctx.req().getSession(false) != null) {
+        ctx.req().getSession().invalidate();
+      }
+
+      ctx.result(Integer.toString(OperationResponse.SUCCEED));
+    } catch (OperationException e) {
+      ctx.result(e.toResultString());
+    }
+  }
+
+  private void handleWithdraw(Context ctx) {
+    LoggedRequestDouble req = ctx.bodyAsClass(LoggedRequestDouble.class);
+    Account acc = server.testSession(req.login, req.session);
+    if (acc == null) {
+      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE).toResultString());
+      return;
     }
 
-    public synchronized Collection<IAccountAuthListener> getAuthListeners() {
-        return new LinkedList<>(listenerList);
+    OperationResponse res = acc.withdraw(req.amount);
+    ctx.result(res.toResultString());
+  }
+
+  private void handleDeposit(Context ctx) {
+    LoggedRequestDouble req = ctx.bodyAsClass(LoggedRequestDouble.class);
+    Account acc = server.testSession(req.login, req.session);
+    if (acc == null) {
+      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE).toResultString());
+      return;
     }
 
-    private static class AuthRequest {
-        public String login;
-        public String password;
+    OperationResponse res = acc.deposit(req.amount);
+    ctx.result(res.toResultString());
+  }
+
+  private void handleBalance(Context ctx) {
+    LoggedRequest req = ctx.bodyAsClass(LoggedRequest.class);
+    Account acc = server.testSession(req.login, req.session);
+    if (acc == null) {
+      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE).toResultString());
+      return;
     }
 
-    private static class LoggedRequest {
-        public String login;
-        public long session;
-    }
+    OperationResponse res = acc.getBalance();
+    ctx.result(res.toResultString());
+  }
 
-    private static class LoggedRequestDouble {
-        public String login;
-        public double amount;
-        public long session;
-    }
+  private boolean isValidAuthRequest(AuthRequest req) {
+    return req != null
+        && req.login != null
+        && req.password != null
+        && !req.login.isBlank()
+        && !req.password.isBlank();
+  }
 
-    public void stop() {
-        app.stop();
-    }
+  private static class AuthRequest {
+    public String login;
+    public String password;
+  }
+
+  private static class LoggedRequest {
+    public String login;
+    public long session;
+  }
+
+  private static class LoggedRequestDouble {
+    public String login;
+    public double amount;
+    public long session;
+  }
 }

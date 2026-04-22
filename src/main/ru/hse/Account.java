@@ -1,33 +1,44 @@
 package ru.hse;
 
-import java.util.Random;
-
 public class Account {
+    public static final long NO_SESSION = -1L;
+
     private IAccountDataSource storage;
     protected final String login;
-    private String[] privateKey = new String[256];
-    public Long activeSession = null;
+    private long activeSession = NO_SESSION;
+
+    public Account(String login) {
+        this.login = login;
+    }
 
     public final String getLogin() {
         return login;
     }
 
-    public final Long getActiveSession() {
+    public final long getActiveSession() {
         return activeSession;
     }
 
-    public Account(String login) {
-        this.login = login;
-        Random r = new Random(login.hashCode());
-        for(int i = 0;i<privateKey.length;i++)
-            privateKey[i] = Long.toString(r.nextLong())+Double.toString(r.nextDouble());
+    public void setActiveSession(long session) {
+        this.activeSession = session;
+    }
+
+    public void invalidateSession() {
+        this.activeSession = NO_SESSION;
     }
 
     public OperationResponse withdraw(double amount) {
-        if (storage == null) return OperationResponse.CONNECTION_ERROR_RESPONSE;
-        if (activeSession == null) return OperationResponse.NOT_LOGGED_RESPONSE;
+        if (storage == null) {
+            return OperationResponse.CONNECTION_ERROR_RESPONSE;
+        }
+        if (activeSession == NO_SESSION) {
+            return OperationResponse.NOT_LOGGED_RESPONSE;
+        }
+
         OperationResponse response = storage.withdraw(login, activeSession, amount);
-        switch (response.code) {
+        Object body = response.body();
+
+        switch (response.code()) {
             case OperationResponse.CONNECTION_ERROR:
                 return OperationResponse.CONNECTION_ERROR_RESPONSE;
             case OperationResponse.INCORRECT_SESSION:
@@ -35,26 +46,36 @@ public class Account {
             case OperationResponse.NOT_LOGGED:
                 return OperationResponse.NOT_LOGGED_RESPONSE;
             case OperationResponse.NO_MONEY:
-                Object r = response.body;
-                if (r != null && r instanceof Double)
-                    return new OperationResponse(OperationResponse.NO_MONEY, r);
+                if (body instanceof Double) {
+                    return new OperationResponse(OperationResponse.NO_MONEY, body);
+                }
                 break;
             case OperationResponse.UNDEFINED_ERROR:
                 return response;
             case OperationResponse.SUCCEED:
-                r = response.body;
-                if (r != null && r instanceof Double)
-                    return new OperationResponse(OperationResponse.SUCCEED, r);
+                if (body instanceof Double) {
+                    return new OperationResponse(OperationResponse.SUCCEED, body);
+                }
+                break;
+            default:
                 break;
         }
+
         return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
     }
 
     public OperationResponse deposit(double amount) {
-        if (storage == null) return OperationResponse.CONNECTION_ERROR_RESPONSE;
-        if (activeSession == null) return OperationResponse.NOT_LOGGED_RESPONSE;
+        if (storage == null) {
+            return OperationResponse.CONNECTION_ERROR_RESPONSE;
+        }
+        if (activeSession == NO_SESSION) {
+            return OperationResponse.NOT_LOGGED_RESPONSE;
+        }
+
         OperationResponse response = storage.deposit(login, activeSession, amount);
-        switch (response.code) {
+        Object body = response.body();
+
+        switch (response.code()) {
             case OperationResponse.CONNECTION_ERROR:
                 return OperationResponse.CONNECTION_ERROR_RESPONSE;
             case OperationResponse.NOT_LOGGED:
@@ -62,19 +83,29 @@ public class Account {
             case OperationResponse.UNDEFINED_ERROR:
                 return response;
             case OperationResponse.SUCCEED:
-                Object r = response.body;
-                if (r != null && r instanceof Double)
-                    return new OperationResponse(OperationResponse.SUCCEED, r);
+                if (body instanceof Double) {
+                    return new OperationResponse(OperationResponse.SUCCEED, body);
+                }
+                break;
+            default:
                 break;
         }
+
         return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
     }
 
     public OperationResponse getBalance() {
-        if (storage == null) return OperationResponse.CONNECTION_ERROR_RESPONSE;
-        if (activeSession == null) return OperationResponse.NOT_LOGGED_RESPONSE;
+        if (storage == null) {
+            return OperationResponse.CONNECTION_ERROR_RESPONSE;
+        }
+        if (activeSession == NO_SESSION) {
+            return OperationResponse.NOT_LOGGED_RESPONSE;
+        }
+
         OperationResponse response = storage.getBalance(login, activeSession);
-        switch (response.code) {
+        Object body = response.body();
+
+        switch (response.code()) {
             case OperationResponse.CONNECTION_ERROR:
                 return OperationResponse.CONNECTION_ERROR_RESPONSE;
             case OperationResponse.NOT_LOGGED:
@@ -84,10 +115,14 @@ public class Account {
             case OperationResponse.UNDEFINED_ERROR:
                 return response;
             case OperationResponse.SUCCEED:
-                Object r = response.body;
-                if (r != null && r instanceof Double)
-                    return new OperationResponse(OperationResponse.SUCCEED, r);
+                if (body instanceof Double) {
+                    return new OperationResponse(OperationResponse.SUCCEED, body);
+                }
+                break;
+            default:
+                break;
         }
+
         return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
     }
 

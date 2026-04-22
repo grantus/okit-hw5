@@ -13,8 +13,8 @@ public class ServerLogicProxy implements IAccountDataSource {
     @Override
     public OperationResponse withdraw(String login, long session, double delta) {
         OperationResponse balanceResponse = dataSource.getBalance(login, session);
-        if (balanceResponse.code == OperationResponse.SUCCEED) {
-            Double amount = (Double) balanceResponse.body;
+        if (balanceResponse.code() == OperationResponse.SUCCEED) {
+            Double amount = (Double) balanceResponse.body();
             if (delta > amount) return new OperationResponse(OperationResponse.NO_MONEY, amount);
             return dataSource.withdraw(login, session, delta);
         }

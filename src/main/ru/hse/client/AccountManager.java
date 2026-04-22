@@ -1,12 +1,7 @@
 package ru.hse.client;
 
-import org.mindrot.jbcrypt.BCrypt;
 import ru.hse.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,7 +9,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class AccountManager {
+public final class AccountManager {
     private IAuthorizationSource serverAuthData;
     private IAccountDataSource serverAccountsData;
     private final ConcurrentLinkedDeque<OperationException> exceptionsList =
@@ -29,9 +24,7 @@ public class AccountManager {
     }
 
     public static String getEncodedPassword(String password) {
-        // here to be the magic with some salt
-        // return BCrypt.hashpw(password, salt);
-        return password == null ? null : "encoded_" + password;
+        return password;
     }
 
     private void init(IAuthorizationSource authSource, IAccountDataSource dataSource)
@@ -58,12 +51,12 @@ public class AccountManager {
             }
             String hashed = getEncodedPassword(password);
             OperationResponse response = callRegister(login, hashed);
-            if (response.code == OperationResponse.SUCCEED) {
-                Account a = (Account) response.body;
+            if (response.code() == OperationResponse.SUCCEED) {
+                Account a = (Account) response.body();
                 activeAccounts.put(login, a);
                 return a;
             } else {
-                switch (response.code) {
+                switch (response.code()) {
                     case OperationResponse.CONNECTION_ERROR:
                     case OperationResponse.UNDEFINED_ERROR:
                     case OperationResponse.INCORRECT_RESPONSE:
@@ -94,17 +87,17 @@ public class AccountManager {
                 registerException(
                         new OperationException(
                                 new OperationResponse(
-                                        OperationResponse.ALREADY_LOGGED, activeAccount.activeSession)));
+                                        OperationResponse.ALREADY_LOGGED, activeAccount.getActiveSession())));
                 return null;
             }
             String hashed = getEncodedPassword(password);
             OperationResponse response = callLogin(login, hashed);
-            if (response.code == OperationResponse.SUCCEED) {
-                Account a = (Account) response.body;
+            if (response.code() == OperationResponse.SUCCEED) {
+                Account a = (Account) response.body();
                 activeAccounts.put(login, a);
                 return a;
             } else {
-                switch (response.code) {
+                switch (response.code()) {
                     case OperationResponse.CONNECTION_ERROR:
                     case OperationResponse.UNDEFINED_ERROR:
                     case OperationResponse.NO_USER_INCORRECT_PASSWORD:
@@ -126,13 +119,12 @@ public class AccountManager {
 
     private OperationResponse callRegister(String login, String password) {
         OperationResponse response = serverAuthData.register(login, password);
-        if (response.code == OperationResponse.SUCCEED) {
-            Object answer = response.body;
-            if (answer != null && answer instanceof Long) {
+        if (response.code() == OperationResponse.SUCCEED) {
+            Object answer = response.body();
+            if (answer instanceof Long id) {
                 try {
-                    Long id = (Long) answer;
-                    Account a = new Account(login);
-                    a.activeSession = id;
+                  Account a = new Account(login);
+                    a.setActiveSession(id);
                     a.initDataStorage(serverAccountsData);
                     return new OperationResponse(OperationResponse.SUCCEED, a);
                 } catch (NumberFormatException nfe) {
@@ -140,7 +132,7 @@ public class AccountManager {
                 }
             }
         } else {
-            switch (response.code) {
+            switch (response.code()) {
                 case OperationResponse.CONNECTION_ERROR:
                 case OperationResponse.UNDEFINED_ERROR:
                 case OperationResponse.ALREADY_INITIATED:
@@ -152,12 +144,12 @@ public class AccountManager {
 
     private OperationResponse callLogin(String login, String password) {
         OperationResponse response = serverAuthData.login(login, password);
-        switch (response.code) {
+        switch (response.code()) {
             case OperationResponse.SUCCEED: {
-                Object answer = response.body;
+                Object answer = response.body();
                 if (answer instanceof Long) {
                     Account a = new Account(login);
-                    a.activeSession = (Long) answer;
+                    a.setActiveSession((Long) answer);
                     a.initDataStorage(serverAccountsData);
                     return new OperationResponse(OperationResponse.SUCCEED, a);
                 }
@@ -173,17 +165,13 @@ public class AccountManager {
     }
 
     private OperationResponse callLogout(Account a) {
-        if (a.getActiveSession() == null) return OperationResponse.NOT_LOGGED_RESPONSE;
+        if (a.getActiveSession() == Account.NO_SESSION) return OperationResponse.NOT_LOGGED_RESPONSE;
         OperationResponse response = serverAuthData.logout(a.getLogin(), a.getActiveSession());
-        switch (response.code) {
-            case OperationResponse.SUCCEED:
-            case OperationResponse.CONNECTION_ERROR:
-            case OperationResponse.UNDEFINED_ERROR:
-            case OperationResponse.NOT_LOGGED:
-            case OperationResponse.INCORRECT_SESSION:
-                return response;
-        }
-        return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
+      return switch (response.code()) {
+        case OperationResponse.SUCCEED, OperationResponse.CONNECTION_ERROR, OperationResponse.UNDEFINED_ERROR,
+             OperationResponse.NOT_LOGGED, OperationResponse.INCORRECT_SESSION -> response;
+        default -> new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
+      };
     }
 
     public boolean logout(Account account) {
@@ -197,11 +185,11 @@ public class AccountManager {
             return false;
         }
         OperationResponse response = callLogout(b);
-        if (response.code == OperationResponse.SUCCEED) {
+        if (response.code() == OperationResponse.SUCCEED) {
             activeAccounts.remove(account.getLogin());
             return true;
         } else {
-            switch (response.code) {
+            switch (response.code()) {
                 case OperationResponse.CONNECTION_ERROR:
                 case OperationResponse.UNDEFINED_ERROR:
                 case OperationResponse.NOT_LOGGED:

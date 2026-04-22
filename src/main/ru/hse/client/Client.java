@@ -1,10 +1,12 @@
 package ru.hse.client;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.hse.*;
-import java.util.*;
 
 public class Client {
-    private final AccountManager accountManager;
+  private static final Logger log = LoggerFactory.getLogger(Client.class);
+  private final AccountManager accountManager;
 
     public Client(IAuthorizationSource authSource, IAccountDataSource dataSource)
             throws OperationException {
@@ -28,14 +30,14 @@ public class Client {
             OperationException[] exs = accountManager.getExceptions().toArray(new OperationException[0]);
             for (int i = size; i < exs.length; i++) {
                 OperationException oe = exs[i];
-                switch (oe.response.code) {
+                switch (oe.response.code()) {
                     case OperationResponse.NULL_ARGUMENT:
                     case OperationResponse.ALREADY_INITIATED:
                     case OperationResponse.UNDEFINED_ERROR:
                     case OperationResponse.CONNECTION_ERROR:
                         throw oe;
                     default:
-                        System.err.println(oe.toString());
+                        log.error("e: ", oe);
                 }
             }
         }
@@ -49,7 +51,7 @@ public class Client {
             OperationException[] exs = accountManager.getExceptions().toArray(new OperationException[0]);
             for (int i = size; i < exs.length; i++) {
                 OperationException oe = exs[i];
-                switch (oe.response.code) {
+                switch (oe.response.code()) {
                     case OperationResponse.NULL_ARGUMENT:
                     case OperationResponse.UNDEFINED_ERROR:
                     case OperationResponse.CONNECTION_ERROR:
@@ -57,7 +59,7 @@ public class Client {
                     case OperationResponse.NO_USER_INCORRECT_PASSWORD:
                         throw oe;
                     default:
-                        System.err.println(oe.toString());
+                        log.error("e: ", oe);
                 }
             }
         }
@@ -70,7 +72,7 @@ public class Client {
             OperationException[] exs = accountManager.getExceptions().toArray(new OperationException[0]);
             for (int i = size; i < exs.length; i++) {
                 OperationException oe = exs[i];
-                switch (oe.response.code) {
+                switch (oe.response.code()) {
                     case OperationResponse.UNDEFINED_ERROR:
                     case OperationResponse.NULL_ARGUMENT:
                     case OperationResponse.NOT_LOGGED:
@@ -78,7 +80,7 @@ public class Client {
                     case OperationResponse.CONNECTION_ERROR:
                         throw oe;
                     default:
-                        System.err.println(oe.toString());
+                        log.error("e: ", oe);
                 }
             }
 
@@ -89,27 +91,27 @@ public class Client {
 
     public static double getBalance(Account a) throws OperationException {
         OperationResponse response = a.getBalance();
-        if (response.code == OperationResponse.SUCCEED) return (Double) response.body;
-        if (response.code == OperationResponse.INCORRECT_RESPONSE)
-            System.err.println(response.toString());
+        if (response.code() == OperationResponse.SUCCEED) return (Double) response.body();
+        if (response.code() == OperationResponse.INCORRECT_RESPONSE)
+            System.err.println(response);
         else throw new OperationException(response);
         return Double.NaN;
     }
 
     public static double withdraw(Account a, double amound) throws OperationException {
         OperationResponse response = a.withdraw(amound);
-        if (response.code == OperationResponse.SUCCEED) return (Double) response.body;
-        if (response.code == OperationResponse.INCORRECT_RESPONSE)
-            System.err.println(response.toString());
+        if (response.code() == OperationResponse.SUCCEED) return (Double) response.body();
+        if (response.code() == OperationResponse.INCORRECT_RESPONSE)
+            System.err.println(response);
         else throw new OperationException(response);
         return Double.NaN;
     }
 
     public static double deposit(Account a, double amound) throws OperationException {
         OperationResponse response = a.deposit(amound);
-        if (response.code == OperationResponse.SUCCEED) return (Double) response.body;
-        if (response.code == OperationResponse.INCORRECT_RESPONSE)
-            System.err.println(response.toString());
+        if (response.code() == OperationResponse.SUCCEED) return (Double) response.body();
+        if (response.code() == OperationResponse.INCORRECT_RESPONSE)
+            System.err.println(response);
         else throw new OperationException(response);
         return Double.NaN;
     }

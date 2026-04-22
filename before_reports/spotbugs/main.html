@@ -1,0 +1,540 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta charset="UTF-8"/>
+      <title>SpotBugs Report</title>
+      <style type="text/css">
+		.tablerow0 {
+			background: #EEEEEE;
+		}
+
+		.tablerow1 {
+			background: white;
+		}
+
+		.detailrow0 {
+			background: #EEEEEE;
+		}
+
+		.detailrow1 {
+			background: white;
+		}
+
+		.tableheader {
+			background: #b9b9fe;
+			font-size: larger;
+		}
+
+		.tablerow0:hover, .tablerow1:hover {
+			background: #aaffaa;
+		}
+
+		.priority-1 {
+				color: red;
+				font-weight: bold;
+		}
+		.priority-2 {
+				color: orange;
+				font-weight: bold;
+		}
+		.priority-3 {
+				color: green;
+				font-weight: bold;
+		}
+		.priority-4 {
+				color: blue;
+				font-weight: bold;
+		}
+		</style>
+      <script type="text/javascript">
+			function toggleRow(elid) {
+				if (document.getElementById) {
+					element = document.getElementById(elid);
+					if (element) {
+						if (element.style.display == 'none') {
+							element.style.display = 'block';
+							//window.status = 'Toggle on!';
+						} else {
+							element.style.display = 'none';
+							//window.status = 'Toggle off!';
+						}
+					}
+				}
+			}
+		</script>
+   </head>
+   <body>
+      <h1>
+         <a href="https://spotbugs.github.io/">SpotBugs</a> Report</h1>
+      <h2>Project Information</h2>
+      <p>Project: 
+		hw5_okit (spotbugsMain)</p>
+      <p>SpotBugs version: 4.9.4</p>
+      <p>Code analyzed:</p>
+      <ul>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/IAccountDataSource.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/IAuthorizationSource.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ServerLogicProxy.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/AccountServer$1.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/IAccountAuthListener.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/AccountSecurity.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$LoggedRequest.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/Server.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/IAccountChangeVerifier.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$LoggedRequestDouble.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$AuthRequest.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ServerStorage.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/AccountServer.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/OperationException.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/OperationResponse.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/Account.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/ApiClient.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/AccountManager.class</li>
+         <li>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/Client.class</li>
+      </ul>
+      <p>
+         <br/>
+         <br/>
+      </p>
+      <h2>Metrics</h2>
+      <p>1017 lines of code analyzed,
+	in 20 classes, 
+	in 3 packages.</p>
+      <table width="500" cellpadding="5" cellspacing="2">
+         <tr class="tableheader">
+            <th align="left">Metric</th>
+            <th align="right">Total</th>
+            <th align="right">Density*</th>
+         </tr>
+         <tr class="tablerow0">
+            <td>High Priority Warnings</td>
+            <td align="right">3</td>
+            <td align="right">2.95</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>Medium Priority Warnings</td>
+            <td align="right">9</td>
+            <td align="right">8.85</td>
+         </tr>
+         <tr class="$totalClass">
+            <td>
+               <b>Total Warnings</b>
+            </td>
+            <td align="right">
+               <b>12</b>
+            </td>
+            <td align="right">
+               <b>11.80</b>
+            </td>
+         </tr>
+      </table>
+      <p>
+         <i>(* Defects per Thousand lines of non-commenting source statements)</i>
+      </p>
+      <p>
+         <br/>
+         <br/>
+      </p>
+      <h2>Contents</h2>
+      <ul>
+         <li>
+            <a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_I18N">Internationalization Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_MT_CORRECTNESS">Multithreaded correctness Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+         </li>
+         <li>
+            <a href="#Warnings_STYLE">Dodgy code Warnings</a>
+         </li>
+         <li>
+            <a href="#Details">Details</a>
+         </li>
+      </ul>
+      <h1>Summary</h1>
+      <table width="500" cellpadding="5" cellspacing="2">
+         <tr class="tableheader">
+            <th align="left">Warning Type</th>
+            <th align="right">Number</th>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <a href="#Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+            </td>
+            <td align="right">4</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>
+               <a href="#Warnings_I18N">Internationalization Warnings</a>
+            </td>
+            <td align="right">1</td>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <a href="#Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+            </td>
+            <td align="right">1</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>
+               <a href="#Warnings_MT_CORRECTNESS">Multithreaded correctness Warnings</a>
+            </td>
+            <td align="right">2</td>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <a href="#Warnings_PERFORMANCE">Performance Warnings</a>
+            </td>
+            <td align="right">1</td>
+         </tr>
+         <tr class="tablerow1">
+            <td>
+               <a href="#Warnings_STYLE">Dodgy code Warnings</a>
+            </td>
+            <td align="right">3</td>
+         </tr>
+         <tr class="tablerow0">
+            <td>
+               <b>Total</b>
+            </td>
+            <td align="right">
+               <b>12</b>
+            </td>
+         </tr>
+      </table>
+      <h1>Warnings</h1>
+      <p>Click on a warning row to see full context information.</p>
+      <h2>
+         <a name="Warnings_BAD_PRACTICE">Bad practice Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e128');">
+            <td>
+               <span class="priority-2">CT</span>
+            </td>
+            <td>Exception thrown in class ru.hse.client.AccountManager at new ru.hse.client.AccountManager(IAuthorizationSource, IAccountDataSource) will leave the constructor. The object under construction remains partially initialized and may be vulnerable to Finalizer attacks.</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e128" style="display: none;">
+                  <a href="#CT_CONSTRUCTOR_THROW">Bug type CT_CONSTRUCTOR_THROW (click for details)</a>
+                  <br/>In class ru.hse.client.AccountManager<br/>In method new ru.hse.client.AccountManager(IAuthorizationSource, IAccountDataSource)<br/>At AccountManager.java:[line 28]<br/>At AccountManager.java:[line 28]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e247');">
+            <td>
+               <span class="priority-2">CT</span>
+            </td>
+            <td>Exception thrown in class ru.hse.server.ServerStorage at new ru.hse.server.ServerStorage(String) will leave the constructor. The object under construction remains partially initialized and may be vulnerable to Finalizer attacks.</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e247" style="display: none;">
+                  <a href="#CT_CONSTRUCTOR_THROW">Bug type CT_CONSTRUCTOR_THROW (click for details)</a>
+                  <br/>In class ru.hse.server.ServerStorage<br/>In method new ru.hse.server.ServerStorage(String)<br/>At ServerStorage.java:[line 21]<br/>At ServerStorage.java:[line 21]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e84');">
+            <td>
+               <span class="priority-1">DMI</span>
+            </td>
+            <td>Random object created and used only once in new ru.hse.Account(String)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e84" style="display: none;">
+                  <a href="#DMI_RANDOM_USED_ONLY_ONCE">Bug type DMI_RANDOM_USED_ONLY_ONCE (click for details)</a>
+                  <br/>In class ru.hse.Account<br/>In method new ru.hse.Account(String)<br/>Called method java.util.Random.nextDouble()<br/>At Account.java:[line 23]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e99');">
+            <td>
+               <span class="priority-1">DMI</span>
+            </td>
+            <td>Random object created and used only once in new ru.hse.Account(String)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e99" style="display: none;">
+                  <a href="#DMI_RANDOM_USED_ONLY_ONCE">Bug type DMI_RANDOM_USED_ONLY_ONCE (click for details)</a>
+                  <br/>In class ru.hse.Account<br/>In method new ru.hse.Account(String)<br/>Called method java.util.Random.nextLong()<br/>At Account.java:[line 23]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_I18N">Internationalization Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e232');">
+            <td>
+               <span class="priority-1">Dm</span>
+            </td>
+            <td>Found reliance on default encoding in ru.hse.server.Server.main(String[]): new java.util.Scanner(InputStream)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e232" style="display: none;">
+                  <a href="#DM_DEFAULT_ENCODING">Bug type DM_DEFAULT_ENCODING (click for details)</a>
+                  <br/>In class ru.hse.server.Server<br/>In method ru.hse.server.Server.main(String[])<br/>Called method new java.util.Scanner(InputStream)<br/>At Server.java:[line 38]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_MALICIOUS_CODE">Malicious code vulnerability Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e142');">
+            <td>
+               <span class="priority-2">EI2</span>
+            </td>
+            <td>new ru.hse.server.AccountSecurity(AccountServer, ServerStorage) may expose internal representation by storing an externally mutable object into AccountSecurity.data</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e142" style="display: none;">
+                  <a href="#EI_EXPOSE_REP2">Bug type EI_EXPOSE_REP2 (click for details)</a>
+                  <br/>In class ru.hse.server.AccountSecurity<br/>In method new ru.hse.server.AccountSecurity(AccountServer, ServerStorage)<br/>Field ru.hse.server.AccountSecurity.data<br/>Local variable named data<br/>At AccountSecurity.java:[line 16]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_MT_CORRECTNESS">Multithreaded correctness Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e173');">
+            <td>
+               <span class="priority-2">UL</span>
+            </td>
+            <td>ru.hse.server.AccountServer.login(String, String) does not release lock on all exception paths</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e173" style="display: none;">
+                  <a href="#UL_UNRELEASED_LOCK_EXCEPTION_PATH">Bug type UL_UNRELEASED_LOCK_EXCEPTION_PATH (click for details)</a>
+                  <br/>In class ru.hse.server.AccountServer<br/>In method ru.hse.server.AccountServer.login(String, String)<br/>At AccountServer.java:[line 75]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e185');">
+            <td>
+               <span class="priority-2">UL</span>
+            </td>
+            <td>ru.hse.server.AccountServer.testSession(String, Long) does not release lock on all exception paths</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e185" style="display: none;">
+                  <a href="#UL_UNRELEASED_LOCK_EXCEPTION_PATH">Bug type UL_UNRELEASED_LOCK_EXCEPTION_PATH (click for details)</a>
+                  <br/>In class ru.hse.server.AccountServer<br/>In method ru.hse.server.AccountServer.testSession(String, Long)<br/>At AccountServer.java:[line 98]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_PERFORMANCE">Performance Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e160');">
+            <td>
+               <span class="priority-2">UrF</span>
+            </td>
+            <td>Unread field: ru.hse.server.AccountSecurity.maxChange</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e160" style="display: none;">
+                  <a href="#URF_UNREAD_FIELD">Bug type URF_UNREAD_FIELD (click for details)</a>
+                  <br/>In class ru.hse.server.AccountSecurity<br/>Field ru.hse.server.AccountSecurity.maxChange<br/>At AccountSecurity.java:[line 12]</p>
+            </td>
+         </tr>
+      </table>
+      <h2>
+         <a name="Warnings_STYLE">Dodgy code Warnings</a>
+      </h2>
+      <table class="warningtable" width="100%" cellspacing="0">
+         <tr class="tableheader">
+            <th align="left">Code</th>
+            <th align="left">Warning</th>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e197');">
+            <td>
+               <span class="priority-2">RCN</span>
+            </td>
+            <td>Redundant nullcheck of account, which is known to be non-null in ru.hse.server.ApiServer.lambda$new$2(AccountServer, Context)</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e197" style="display: none;">
+                  <a href="#RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE">Bug type RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE (click for details)</a>
+                  <br/>In class ru.hse.server.ApiServer<br/>In method ru.hse.server.ApiServer.lambda$new$2(AccountServer, Context)<br/>Value loaded from account<br/>Return value of ru.hse.server.AccountServer.register(String, String) of type ru.hse.Account<br/>Redundant null check at ApiServer.java:[line 48]</p>
+            </td>
+         </tr>
+         <tr class="tablerow0" onclick="toggleRow('d1e214');">
+            <td>
+               <span class="priority-2">RCN</span>
+            </td>
+            <td>Redundant nullcheck of account, which is known to be non-null in ru.hse.server.ApiServer.lambda$new$3(AccountServer, Context)</td>
+         </tr>
+         <tr class="detailrow0">
+            <td/>
+            <td>
+               <p id="d1e214" style="display: none;">
+                  <a href="#RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE">Bug type RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE (click for details)</a>
+                  <br/>In class ru.hse.server.ApiServer<br/>In method ru.hse.server.ApiServer.lambda$new$3(AccountServer, Context)<br/>Value loaded from account<br/>Return value of ru.hse.server.AccountServer.login(String, String) of type ru.hse.Account<br/>Redundant null check at ApiServer.java:[line 79]</p>
+            </td>
+         </tr>
+         <tr class="tablerow1" onclick="toggleRow('d1e114');">
+            <td>
+               <span class="priority-2">US</span>
+            </td>
+            <td>Suppressing annotation SECOBDES on the method ru.hse.OperationResponse.responceFromString(String) is unnecessary</td>
+         </tr>
+         <tr class="detailrow1">
+            <td/>
+            <td>
+               <p id="d1e114" style="display: none;">
+                  <a href="#US_USELESS_SUPPRESSION_ON_METHOD">Bug type US_USELESS_SUPPRESSION_ON_METHOD (click for details)</a>
+                  <br/>In class ru.hse.OperationResponse<br/>In method ru.hse.OperationResponse.responceFromString(String)<br/>Value SECOBDES <br/>At OperationResponse.java:[lines 148-152]</p>
+            </td>
+         </tr>
+      </table>
+      <h1>
+         <a name="Details">Details</a>
+      </h1>
+      <h2>
+         <a name="CT_CONSTRUCTOR_THROW">CT_CONSTRUCTOR_THROW: Be wary of letting constructors throw exceptions.</a>
+      </h2>
+      
+            <p>Classes that throw exceptions in their constructors are vulnerable to Finalizer attacks</p>
+
+            <p>A finalizer attack can be prevented, by declaring the class final, using an empty finalizer declared as final, or by a clever use of a private constructor.</p>
+
+            <p>See <a href="https://wiki.sei.cmu.edu/confluence/display/java/OBJ11-J.+Be+wary+of+letting+constructors+throw+exceptions"><code>SEI CERT Rule OBJ-11</code></a>
+            for more information.
+            </p>
+            
+    <h2>
+         <a name="DMI_RANDOM_USED_ONLY_ONCE">DMI_RANDOM_USED_ONLY_ONCE: Random object created and used only once</a>
+      </h2>
+
+<p> This code creates a java.util.Random object, uses it to generate one random number, and then discards
+the Random object. This produces mediocre quality random numbers and is inefficient.
+If possible, rewrite the code so that the Random object is created once and saved, and each time a new random number
+is required invoke a method on the existing Random object to obtain it.
+</p>
+
+<p>If it is important that the generated Random numbers not be guessable, you <em>must</em> not create a new Random for each random
+number; the values are too easily guessable. You should strongly consider using a java.security.SecureRandom instead
+(and avoid allocating a new SecureRandom for each random number needed).
+</p>
+
+    <h2>
+         <a name="DM_DEFAULT_ENCODING">DM_DEFAULT_ENCODING: Reliance on default encoding</a>
+      </h2>
+
+<p> Found a call to a method which will perform a byte to String (or String to byte) conversion,
+and will assume that the default platform encoding is suitable. This will cause the application
+behavior to vary between platforms. Use an alternative API and specify a charset name or Charset
+object explicitly.</p>
+<p>See <a href="https://cwe.mitre.org/data/definitions/173.html">CWE-173: Improper Handling of Alternate Encoding</a>.
+</p>
+
+      <h2>
+         <a name="EI_EXPOSE_REP2">EI_EXPOSE_REP2: May expose internal representation by incorporating reference to mutable object</a>
+      </h2>
+
+  <p> This code stores a reference to an externally mutable object into the
+  internal representation of the object.&nbsp;
+   If instances
+   are accessed by untrusted code, and unchecked changes to
+   the mutable object would compromise security or other
+   important properties, you will need to do something different.
+  Storing a copy of the object is better approach in many situations.</p>
+  <p>See <a href="https://cwe.mitre.org/data/definitions/374.html">CWE-374: Passing Mutable Objects to an Untrusted Method</a>.
+</p>
+
+    <h2>
+         <a name="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE">RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE: Redundant nullcheck of value known to be non-null</a>
+      </h2>
+
+<p> This method contains a redundant check of a known non-null value against
+the constant null.</p>
+
+    <h2>
+         <a name="UL_UNRELEASED_LOCK_EXCEPTION_PATH">UL_UNRELEASED_LOCK_EXCEPTION_PATH: Method does not release lock on all exception paths</a>
+      </h2>
+
+<p> This method acquires a JSR-166 (<code>java.util.concurrent</code>) lock,
+but does not release it on all exception paths out of the method.  In general, the correct idiom
+for using a JSR-166 lock is:
+</p>
+<pre><code>Lock l = ...;
+l.lock();
+try {
+    // do something
+} finally {
+    l.unlock();
+}
+</code></pre>
+<p>See <a href="https://cwe.mitre.org/data/definitions/413.html">CWE-413: Improper Resource Locking</a>
+and <a href="https://cwe.mitre.org/data/definitions/459.html">CWE-459: Incomplete Cleanup</a>.</p>
+
+    <h2>
+         <a name="US_USELESS_SUPPRESSION_ON_METHOD">US_USELESS_SUPPRESSION_ON_METHOD: Useless suppression on a method</a>
+      </h2>
+      <p>
+      Suppressing annotations <code>&amp;SuppressFBWarnings</code> should be removed from the source code as soon as they are no more needed.
+      Leaving them may result in accidental warnings suppression.
+      The annotation was probably added to suppress a warning raised by SpotBugs, but now SpotBugs does not report the bug anymore. Either
+      the bug was solved or SpotBugs was updated, and the bug is no longer raised by that code.
+      The unnecessary annotation is not reported when the class or method is annotated with an <code>&amp;Generated</code> annotation with retention CLASS or RUNTIME.
+      </p>
+    <h2>
+         <a name="URF_UNREAD_FIELD">URF_UNREAD_FIELD: Unread field</a>
+      </h2>
+
+  <p> This field is never read.&nbsp; Consider removing it from the class.</p>
+  <p>See <a href="https://cwe.mitre.org/data/definitions/563.html">CWE-563: Assignment to Variable without Use</a>.
+</p>
+
+    </body>
+</html>

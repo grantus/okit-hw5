@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'application'
+    id 'pmd'
+    id 'com.github.spotbugs' version '6.4.0'
 }
 
 repositories {
@@ -12,7 +14,9 @@ sourceSets {
         java {
             srcDirs = ['src/main']
         }
-
+        resources {
+            srcDirs = ['src/main/resources']
+        }
     }
 }
 
@@ -31,9 +35,34 @@ java {
         languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
+pmd {
+    consoleOutput = true
+    ignoreFailures = false
+}
+spotbugs {
+    ignoreFailures = false
+}
+tasks.withType(Pmd).configureEach {
+    reports {
+        html.required = true
+        xml.required = true
+    }
+}
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
+    reports {
+        html.required = true
+        xml.required = true
+        text.required = false
+    }
+}
 tasks.register('runClient', JavaExec) {
     dependsOn 'classes'
     mainClass = 'ru.hse.client.Client'
+    classpath = sourceSets.main.runtimeClasspath
+}
+tasks.register('runProfilingScenario', JavaExec) {
+    dependsOn 'classes'
+    mainClass = 'ru.hse.profile.ProfilingScenario'
     classpath = sourceSets.main.runtimeClasspath
 }
 application {

@@ -1,7 +1,14 @@
 package ru.hse.server;
 
-import ru.hse.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.hse.Account;
+import ru.hse.IAccountDataSource;
+import ru.hse.IAuthorizationSource;
+import ru.hse.OperationException;
+import ru.hse.OperationResponse;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,59 +16,44 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class AccountServer {
+    private static final Logger log = LoggerFactory.getLogger(AccountServer.class);
+
     private final Lock accountsLock = new ReentrantLock();
-    private final HashMap<String, Account> activeAccounts = new HashMap<>();
+    private final Map<String, Account> activeAccounts = new HashMap<>();
+    private final Map<Long, Account> activeSessions = new HashMap<>();
     private final IAccountDataSource dataSource;
     private final IAuthorizationSource authSource;
 
     public AccountServer(IAuthorizationSource ast, IAccountDataSource dst) {
         this.authSource = ast;
         this.dataSource = dst;
-        Runtime.getRuntime()
-                .addShutdownHook(
-                        new Thread(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        accountsLock.lock();
-                                        try {
-                                            for (Account a : activeAccounts.values()) {
-                                                try {
-                                                    logout(a);
-                                                } catch (OperationException e) {
-                                                    System.err.println(e.toString());
-                                                }
-                                            }
-                                        } finally {
-                                            accountsLock.unlock();
-                                        }
-                                    }
-                                }));
+        Runtime.getRuntime().addShutdownHook(new Thread(this::logoutAllSafely));
     }
-
-    private final Map<Long, Account> activeSessions = new HashMap<>();
-    private final Map<Long, Boolean> sessionEnabled = new HashMap<>();
 
     public Account register(String login, String password) throws OperationException {
         if (login == null || password == null) {
             throw new OperationException(OperationResponse.NULL_ARGUMENT_EXCEPTION);
         }
+
         accountsLock.lock();
         try {
             Account activeAccount = activeAccounts.get(login);
             if (activeAccount != null) {
                 throw new OperationException(OperationResponse.ALREADY_INITIATED_RESPONSE);
             }
+
             OperationResponse response = authSource.register(login, password);
-            if (response.code == OperationResponse.SUCCEED) {
-                Account a = new Account(login);
-                a.initDataStorage(dataSource);
-                a.activeSession = Long.parseLong((String) response.body);
-                activeSessions.put(a.activeSession, a);
-                sessionEnabled.put(a.activeSession, true);
-                activeAccounts.put(login, a);
-                return a;
-            } else throw new OperationException(response);
+            if (response.code() != OperationResponse.SUCCEED) {
+                throw new OperationException(response);
+            }
+
+            Account account = new Account(login);
+            account.initDataStorage(dataSource);
+            account.setActiveSession(parseSessionId(response.body()));
+
+            activeSessions.put(account.getActiveSession(), account);
+            activeAccounts.put(login, account);
+            return account;
         } finally {
             accountsLock.unlock();
         }
@@ -70,36 +62,46 @@ public class AccountServer {
     public Account login(String login, String password) throws OperationException {
         if (login == null || password == null) {
             throw new OperationException(
-                    new OperationResponse(OperationResponse.NO_USER_INCORRECT_PASSWORD, null));
+                new OperationResponse(OperationResponse.NO_USER_INCORRECT_PASSWORD, null));
         }
+
         accountsLock.lock();
-        Account activeAccount = activeAccounts.get(login);
-        if (activeAccount != null) {
-            throw new OperationException(
-                    new OperationResponse(OperationResponse.ALREADY_LOGGED, activeAccount.activeSession));
-        }
         try {
-            OperationResponse storedResponse = authSource.login(login, password);
-            if (storedResponse.code == OperationResponse.SUCCEED) {
-                Account a = new Account(login);
-                a.initDataStorage(dataSource);
-                a.activeSession = Long.parseLong((String) storedResponse.body);
-                activeSessions.put(a.activeSession, a);
-                sessionEnabled.put(a.activeSession, true);
-                activeAccounts.put(login, a);
-                return a;
-            } else throw new OperationException(storedResponse);
+            Account activeAccount = activeAccounts.get(login);
+            if (activeAccount != null) {
+                throw new OperationException(
+                    new OperationResponse(
+                        OperationResponse.ALREADY_LOGGED, activeAccount.getActiveSession()));
+            }
+
+            OperationResponse response = authSource.login(login, password);
+            if (response.code() != OperationResponse.SUCCEED) {
+                throw new OperationException(response);
+            }
+
+            Account account = new Account(login);
+            account.initDataStorage(dataSource);
+            account.setActiveSession(parseSessionId(response.body()));
+
+            activeSessions.put(account.getActiveSession(), account);
+            activeAccounts.put(login, account);
+            return account;
         } finally {
             accountsLock.unlock();
         }
     }
 
     public Account testSession(String login, Long session) {
+        if (login == null || session == null) {
+            return null;
+        }
+
         accountsLock.lock();
-        Account activeAccount = activeAccounts.get(login);
         try {
-            if (activeAccount != null && Objects.equals(activeAccount.activeSession, session))
-                return activeAccount;
+            Account account = activeSessions.get(session);
+            if (account != null && Objects.equals(account.getLogin(), login)) {
+                return account;
+            }
             return null;
         } finally {
             accountsLock.unlock();
@@ -109,23 +111,73 @@ public class AccountServer {
     public void logout(Account account) throws OperationException {
         if (account == null || account.getLogin() == null) {
             throw new OperationException(
-                    new OperationResponse(OperationResponse.NO_USER_INCORRECT_PASSWORD, null));
+                new OperationResponse(OperationResponse.NO_USER_INCORRECT_PASSWORD, null));
         }
+
         accountsLock.lock();
         try {
-
-            Account b = activeAccounts.get(account.getLogin());
-            if (b == null) {
+            Account storedAccount = activeAccounts.get(account.getLogin());
+            if (storedAccount == null || storedAccount.getActiveSession() == Account.NO_SESSION) {
                 throw new OperationException(
-                        new OperationResponse(OperationResponse.NO_USER_INCORRECT_PASSWORD, null));
+                    new OperationResponse(OperationResponse.NO_USER_INCORRECT_PASSWORD, null));
             }
-            OperationResponse storedResponse = authSource.logout(b.getLogin(), b.activeSession);
-            if (storedResponse.code == OperationResponse.SUCCEED) {
-                sessionEnabled.put(account.activeSession, false);
-                activeAccounts.remove(account.getLogin());
-            } else throw new OperationException(storedResponse);
+
+            OperationResponse response =
+                authSource.logout(storedAccount.getLogin(), storedAccount.getActiveSession());
+            if (response.code() != OperationResponse.SUCCEED) {
+                throw new OperationException(response);
+            }
+
+            Long sessionId = storedAccount.getActiveSession();
+            activeSessions.remove(sessionId);
+            activeAccounts.remove(storedAccount.getLogin());
+            storedAccount.invalidateSession();
+            account.invalidateSession();
         } finally {
             accountsLock.unlock();
         }
+    }
+
+    public int getActiveAccountCount() {
+        accountsLock.lock();
+        try {
+            return activeAccounts.size();
+        } finally {
+            accountsLock.unlock();
+        }
+    }
+
+    private void logoutAllSafely() {
+        ArrayList<Account> accountsToLogout;
+        accountsLock.lock();
+        try {
+            accountsToLogout = new ArrayList<>(activeAccounts.values());
+        } finally {
+            accountsLock.unlock();
+        }
+
+        for (Account account : accountsToLogout) {
+            try {
+                logout(account);
+            } catch (OperationException e) {
+                log.error("Logout failed during shutdown", e);
+            }
+        }
+    }
+
+    private long parseSessionId(Object body) throws OperationException {
+        if (body instanceof Long value) {
+            return value;
+        }
+        if (body instanceof String value) {
+            try {
+                return Long.parseLong(value);
+            } catch (NumberFormatException e) {
+                throw new OperationException(
+                    new OperationResponse(OperationResponse.INCORRECT_RESPONSE, body));
+            }
+        }
+        throw new OperationException(
+            new OperationResponse(OperationResponse.INCORRECT_RESPONSE, body));
     }
 }

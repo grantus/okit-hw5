@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.9.4" sequence="0" timestamp="1776880547566" analysisTimestamp="1776880547566" release="">
+  <Project projectName="hw5_okit (spotbugsMain)">
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/IAccountDataSource.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/IAuthorizationSource.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ServerLogicProxy.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/IAccountAuthListener.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/AccountSecurity.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$LoggedRequest.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/Server.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/IAccountChangeVerifier.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$LoggedRequestDouble.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer$AuthRequest.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ApiServer.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/ServerStorage.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/server/AccountServer.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/profile/ProfilingScenario.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/OperationException.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/OperationResponse.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/Account.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/ApiClient.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/AccountManager.class</Jar>
+    <Jar>/Users/vasilisagolikova/IdeaProjects/hw5_okit/build/classes/java/main/ru/hse/client/Client.class</Jar>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin-bundle/6.7.0/7204497ba4301c828731536947f742295b339ead/javalin-bundle-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.hsqldb/hsqldb/2.7.4/4aad3c109b5b04927d3bc663bf13535f830401ce/hsqldb-2.7.4.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.zaxxer/HikariCP/6.2.1/2d60b91e74ee4ff10fc9a395d10b3b9c7061ef87/HikariCP-6.2.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-simple/2.0.16/56d3d8e59293543780ad35af4ee4a5d9c111a588/slf4j-simple-2.0.16.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.mindrot/jbcrypt/0.4/af7e61017f73abb18ac4e036954f9f28c6366c07/jbcrypt-0.4.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin-testtools/6.7.0/2b6d93cca68729d1c54213a3df8f55173ad930ca/javalin-testtools-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.github.spotbugs/spotbugs-annotations/4.9.8/ca4a2783a6123e67124fd7feb4caccd2e2ac9a73/spotbugs-annotations-4.9.8.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin-context-mock/6.7.0/25823d0a78dbf2e021aac6f77f8eeccec497e34c/javalin-context-mock-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin/6.7.0/71234932cc524cda33bd48638f61ee7242e65ac0/javalin-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.javalin/javalin-micrometer/6.7.0/9337dd1f6d6746f463c3bc6ea3372d9d43931bfb/javalin-micrometer-6.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.18.3/cc57924cccf42fc852081c36215272f84ffcd991/jackson-datatype-jsr310-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.18.3/7fa21cf7da4598f8240e4ebd9779249622af1acd/jackson-annotations-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.18.3/78f80c259268200e588aa204dd97ecf09b76916e/jackson-core-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-kotlin/2.18.3/d79c117605fc157ec32ec9774690bb3e493938ce/jackson-module-kotlin-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.18.3/537e3886263e3b3464385040453e92567fd509e2/jackson-databind-2.18.3.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.aayushatharva.brotli4j/brotli4j/1.18.0/7432f4b2837bfa4e33d325dacb0e9c63acbfdad8/brotli4j-1.18.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.http2/http2-server/11.0.25/dcf2de9e262a1790a9bc162f52a095d8d41a92b4/http2-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-alpn-conscrypt-server/11.0.25/d476ab0266c8af135fd42b7ca31709b95198a198/jetty-alpn-conscrypt-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.5.18/fc371f3fc97a639de2d67947cffb7518ec5e3d40/logback-classic-1.5.18.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-jvm/5.3.0/6c64103d4b99cf95a4498872adc1075de580a30b/okhttp-jvm-5.3.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.8.10/1e90b778ea4669b6bcbfaca57313665ddd804779/kotlin-reflect-1.8.10.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.9.25/1c166692314a2639e5edfed0d23ed7eee4a5c7a5/kotlin-stdlib-jdk7-1.9.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio-jvm/3.16.2/243d8d1d6fce5571f38bda712b3caf8759b4af93/okio-jvm-3.16.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.2.21/fa374a986e128314c3db00a20aae55f72a258511/kotlin-stdlib-2.2.21.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk8/1.9.25/20d44e880a284f7b5cd99dd69450b403073f49b2/kotlin-stdlib-jdk8-1.9.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-jetty11/1.14.5/4c12aecb01aea11cc359febdf8f9f84c9d893c3d/micrometer-jetty11-1.14.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-alpn-server/11.0.25/ccc6317d27a1091f2e9d53d43c17fa2a44dab296/jetty-alpn-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-jetty-server/11.0.25/f63a80e8bc8382c144861ec6082d19c35ab9bd/websocket-jetty-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-webapp/11.0.25/7108ebdcb7733160412e3fc1a62d770f3b187a06/jetty-webapp-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-servlet/11.0.25/b2ebfdba12d4f759c145844d33673223ae08c03f/websocket-servlet-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-servlet/11.0.25/76a1ea0dcd771797ce3c230809918f5a91e9b80f/jetty-servlet-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-security/11.0.25/1698e2bcf1dd06785ded55fd4346bb9adafd64b6/jetty-security-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-core-server/11.0.25/15caaae160f2bb2e09d8c1ccb1e0c6ec0a810cb/websocket-core-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-server/11.0.25/851d4e5d920bc14ba8e00117add2b37f4c1ce96/jetty-server-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.http2/http2-common/11.0.25/9d486943edf74343cddffbd1da700e6bae02d3b8/http2-common-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.http2/http2-hpack/11.0.25/2894216f15307bbbea95cae529ea6b3d5769c537/http2-hpack-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-jetty-common/11.0.25/b612bcbed296d6bc12342af1dbb2d14bcd8fc312/websocket-jetty-common-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-core-common/11.0.25/858d3ca207eee79f4844b33971eee0a58657e532/websocket-core-common-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-http/11.0.25/1c33e326c11d9db04b134d070d600418f818809d/jetty-http-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-io/11.0.25/175602210a8b3fe4a8cc55c07d4b2041daff70e/jetty-io-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-xml/11.0.25/8a2fccd09bd5b45d1acddda2a705ab537179353b/jetty-xml-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty/jetty-util/11.0.25/1f725375a296fed1ec126125165c5d7ae7629437/jetty-util-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/2.0.17/d9e58ac9c7779ba3bf8142aff6c830617a7fe60f/slf4j-api-2.0.17.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.toolchain/jetty-jakarta-servlet-api/5.0.2/27fce6d666a203526236d33d00e202a4136230f/jetty-jakarta-servlet-api-5.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-core/1.14.5/219117417c2893a62bfe84ea70c4ef8d1ea2da5e/micrometer-core-1.14.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/com.aayushatharva.brotli4j/service/1.18.0/f247218f11e6f9a281d143e7a9d296d4be035356/service-1.18.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.conscrypt/conscrypt-openjdk-uber/2.5.2/d858f142ea189c62771c505a6548d8606ac098fe/conscrypt-openjdk-uber-2.5.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.5.18/6c0375624f6f36b4e089e2488ba21334a11ef13f/logback-core-1.5.18.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.eclipse.jetty.websocket/websocket-jetty-api/11.0.25/e2fd6363f3c6073eb783e4342309ae64a63ecc27/websocket-jetty-api-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-observation/1.14.5/b23dff6bf07a29f67fdae8f3f3f8f1c78fa7b126/micrometer-observation-1.14.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/io.micrometer/micrometer-commons/1.14.5/6201a40489ccedc9539c5f7a2c84e9e64702bf10/micrometer-commons-1.14.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/Users/vasilisagolikova/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</AuxClasspathEntry>
+    <SrcDir>/Users/vasilisagolikova/IdeaProjects/hw5_okit/src/main/resources</SrcDir>
+    <SrcDir>/Users/vasilisagolikova/IdeaProjects/hw5_okit/src/main</SrcDir>
+  </Project>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Wed, 22 Apr 2026 20:55:47 +0300" total_classes="0" referenced_classes="0" total_bugs="0" total_size="0" num_packages="0" java_version="17.0.18" vm_version="17.0.18+8" cpu_seconds="4.96" clock_seconds="1.85" peak_mbytes="288.97" alloc_mbytes="4608.00" gc_seconds="0.02">
+    <FindBugsProfile></FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

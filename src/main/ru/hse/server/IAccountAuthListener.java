@@ -1,7 +1,7 @@
 package ru.hse.server;
 
 public interface IAccountAuthListener {
-    public void accountLogin(String login);
+    void accountLogin(String login);
 
-    public void accountLogout(String login);
+    void accountLogout(String login);
 }
