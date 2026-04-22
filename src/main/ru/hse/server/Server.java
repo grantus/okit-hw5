@@ -4,11 +4,17 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 
+/** Starts, stops, and coordinates lifecycle of the account server. */
 public class Server {
   private ServerStorage storage;
   private ApiServer apiServer;
   private final CountDownLatch startedLatch = new CountDownLatch(1);
 
+  /**
+   * Starts server components on the specified port.
+   *
+   * @param port server port
+   */
   public void start(int port) {
     storage = new ServerStorage("accounts");
     ServerLogicProxy storageProxy = new ServerLogicProxy(storage);
@@ -21,6 +27,7 @@ public class Server {
     startedLatch.countDown();
   }
 
+  /** Stops HTTP server and closes storage resources. */
   public void stop() {
     if (apiServer != null) {
       apiServer.stop();
@@ -30,6 +37,7 @@ public class Server {
     }
   }
 
+  /** Waits until server startup is completed. */
   public void waitStarted() {
     try {
       startedLatch.await();
@@ -38,6 +46,11 @@ public class Server {
     }
   }
 
+  /**
+   * Starts the server from command line and waits for stop command.
+   *
+   * @param args optional first argument is port
+   */
   public static void main(String[] args) {
     Server s = new Server();
     int port;

@@ -2,117 +2,206 @@ package ru.hse.client;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.hse.*;
+import ru.hse.Account;
+import ru.hse.IAccountDataSource;
+import ru.hse.IAuthorizationSource;
+import ru.hse.OperationException;
+import ru.hse.OperationResponse;
 
+/** Client facade for account registration, authorization, and balance operations. */
 public class Client {
   private static final Logger log = LoggerFactory.getLogger(Client.class);
+
   private final AccountManager accountManager;
 
-    public Client(IAuthorizationSource authSource, IAccountDataSource dataSource)
-            throws OperationException {
-        accountManager = new AccountManager(authSource, dataSource);
-    }
+  /**
+   * Creates a client using explicit authorization and data sources.
+   *
+   * @param authSource authorization source
+   * @param dataSource account data source
+   * @throws OperationException if manager initialization fails
+   */
+  public Client(IAuthorizationSource authSource, IAccountDataSource dataSource)
+      throws OperationException {
+    accountManager = new AccountManager(authSource, dataSource);
+  }
 
-    public Client(String url) throws OperationException {
-        ApiClient baseApiClient = new ApiClient(url);
-        accountManager = new AccountManager(baseApiClient, baseApiClient);
-    }
+  /**
+   * Creates a client using server URL.
+   *
+   * @param url server base URL
+   * @throws OperationException if manager initialization fails
+   */
+  public Client(String url) throws OperationException {
+    ApiClient baseApiClient = new ApiClient(url);
+    accountManager = new AccountManager(baseApiClient, baseApiClient);
+  }
 
-    // for tests only, do not use in production code
-    public final AccountManager getAccountManager() {
-        return accountManager;
-    }
+  /**
+   * Returns account manager instance.
+   *
+   * @return account manager
+   */
+  public final AccountManager getAccountManager() {
+    return accountManager;
+  }
 
-    public Account register(String login, String password) throws OperationException {
-        int size = accountManager.getExceptions().size();
-        Account a = accountManager.register(login, password);
-        if (a == null) {
-            OperationException[] exs = accountManager.getExceptions().toArray(new OperationException[0]);
-            for (int i = size; i < exs.length; i++) {
-                OperationException oe = exs[i];
-                switch (oe.response.code()) {
-                    case OperationResponse.NULL_ARGUMENT:
-                    case OperationResponse.ALREADY_INITIATED:
-                    case OperationResponse.UNDEFINED_ERROR:
-                    case OperationResponse.CONNECTION_ERROR:
-                        throw oe;
-                    default:
-                        log.error("e: ", oe);
-                }
-            }
+  /**
+   * Registers a new account.
+   *
+   * @param login user login
+   * @param password user password
+   * @return created account
+   * @throws OperationException if registration fails
+   */
+  public Account register(String login, String password) throws OperationException {
+    int size = accountManager.getExceptions().size();
+    Account account = accountManager.register(login, password);
+
+    if (account == null) {
+      OperationException[] exceptions =
+          accountManager.getExceptions().toArray(new OperationException[0]);
+      for (int i = size; i < exceptions.length; i++) {
+        OperationException operationException = exceptions[i];
+        switch (operationException.response.code()) {
+          case OperationResponse.NULL_ARGUMENT:
+          case OperationResponse.ALREADY_INITIATED:
+          case OperationResponse.UNDEFINED_ERROR:
+          case OperationResponse.CONNECTION_ERROR:
+            throw operationException;
+          default:
+            log.error("e: ", operationException);
         }
-        return a;
+      }
     }
 
-    public Account login(String login, String password) throws OperationException {
-        int size = accountManager.getExceptions().size();
-        Account a = accountManager.login(login, password);
-        if (a == null) {
-            OperationException[] exs = accountManager.getExceptions().toArray(new OperationException[0]);
-            for (int i = size; i < exs.length; i++) {
-                OperationException oe = exs[i];
-                switch (oe.response.code()) {
-                    case OperationResponse.NULL_ARGUMENT:
-                    case OperationResponse.UNDEFINED_ERROR:
-                    case OperationResponse.CONNECTION_ERROR:
-                    case OperationResponse.ALREADY_LOGGED:
-                    case OperationResponse.NO_USER_INCORRECT_PASSWORD:
-                        throw oe;
-                    default:
-                        log.error("e: ", oe);
-                }
-            }
+    return account;
+  }
+
+  /**
+   * Logs in an existing account.
+   *
+   * @param login user login
+   * @param password user password
+   * @return logged in account
+   * @throws OperationException if login fails
+   */
+  public Account login(String login, String password) throws OperationException {
+    int size = accountManager.getExceptions().size();
+    Account account = accountManager.login(login, password);
+
+    if (account == null) {
+      OperationException[] exceptions =
+          accountManager.getExceptions().toArray(new OperationException[0]);
+      for (int i = size; i < exceptions.length; i++) {
+        OperationException operationException = exceptions[i];
+        switch (operationException.response.code()) {
+          case OperationResponse.NULL_ARGUMENT:
+          case OperationResponse.UNDEFINED_ERROR:
+          case OperationResponse.CONNECTION_ERROR:
+          case OperationResponse.ALREADY_LOGGED:
+          case OperationResponse.NO_USER_INCORRECT_PASSWORD:
+            throw operationException;
+          default:
+            log.error("e: ", operationException);
         }
-        return a;
+      }
     }
 
-    public boolean logout(Account a) throws OperationException {
-        int size = accountManager.getExceptions().size();
-        if (!accountManager.logout(a)) {
-            OperationException[] exs = accountManager.getExceptions().toArray(new OperationException[0]);
-            for (int i = size; i < exs.length; i++) {
-                OperationException oe = exs[i];
-                switch (oe.response.code()) {
-                    case OperationResponse.UNDEFINED_ERROR:
-                    case OperationResponse.NULL_ARGUMENT:
-                    case OperationResponse.NOT_LOGGED:
-                    case OperationResponse.INCORRECT_SESSION:
-                    case OperationResponse.CONNECTION_ERROR:
-                        throw oe;
-                    default:
-                        log.error("e: ", oe);
-                }
-            }
+    return account;
+  }
 
-            return false;
+  /**
+   * Logs out the specified account.
+   *
+   * @param account account to log out
+   * @return {@code true} if logout succeeded, otherwise {@code false}
+   * @throws OperationException if logout fails
+   */
+  public boolean logout(Account account) throws OperationException {
+    int size = accountManager.getExceptions().size();
+
+    if (!accountManager.logout(account)) {
+      OperationException[] exceptions =
+          accountManager.getExceptions().toArray(new OperationException[0]);
+      for (int i = size; i < exceptions.length; i++) {
+        OperationException operationException = exceptions[i];
+        switch (operationException.response.code()) {
+          case OperationResponse.UNDEFINED_ERROR:
+          case OperationResponse.NULL_ARGUMENT:
+          case OperationResponse.NOT_LOGGED:
+          case OperationResponse.INCORRECT_SESSION:
+          case OperationResponse.CONNECTION_ERROR:
+            throw operationException;
+          default:
+            log.error("e: ", operationException);
         }
-        return true;
+      }
+      return false;
     }
 
-    public static double getBalance(Account a) throws OperationException {
-        OperationResponse response = a.getBalance();
-        if (response.code() == OperationResponse.SUCCEED) return (Double) response.body();
-        if (response.code() == OperationResponse.INCORRECT_RESPONSE)
-            System.err.println(response);
-        else throw new OperationException(response);
-        return Double.NaN;
-    }
+    return true;
+  }
 
-    public static double withdraw(Account a, double amound) throws OperationException {
-        OperationResponse response = a.withdraw(amound);
-        if (response.code() == OperationResponse.SUCCEED) return (Double) response.body();
-        if (response.code() == OperationResponse.INCORRECT_RESPONSE)
-            System.err.println(response);
-        else throw new OperationException(response);
-        return Double.NaN;
+  /**
+   * Returns current account balance.
+   *
+   * @param account account to inspect
+   * @return current balance
+   * @throws OperationException if operation fails
+   */
+  public static double getBalance(Account account) throws OperationException {
+    OperationResponse response = account.getBalance();
+    if (response.code() == OperationResponse.SUCCEED) {
+      return (Double) response.body();
     }
+    if (response.code() == OperationResponse.INCORRECT_RESPONSE) {
+      System.err.println(response);
+    } else {
+      throw new OperationException(response);
+    }
+    return Double.NaN;
+  }
 
-    public static double deposit(Account a, double amound) throws OperationException {
-        OperationResponse response = a.deposit(amound);
-        if (response.code() == OperationResponse.SUCCEED) return (Double) response.body();
-        if (response.code() == OperationResponse.INCORRECT_RESPONSE)
-            System.err.println(response);
-        else throw new OperationException(response);
-        return Double.NaN;
+  /**
+   * Withdraws money from the account.
+   *
+   * @param account account to update
+   * @param amount amount to withdraw
+   * @return resulting balance
+   * @throws OperationException if operation fails
+   */
+  public static double withdraw(Account account, double amount) throws OperationException {
+    OperationResponse response = account.withdraw(amount);
+    if (response.code() == OperationResponse.SUCCEED) {
+      return (Double) response.body();
     }
+    if (response.code() == OperationResponse.INCORRECT_RESPONSE) {
+      System.err.println(response);
+    } else {
+      throw new OperationException(response);
+    }
+    return Double.NaN;
+  }
+
+  /**
+   * Deposits money to the account.
+   *
+   * @param account account to update
+   * @param amount amount to deposit
+   * @return resulting balance
+   * @throws OperationException if operation fails
+   */
+  public static double deposit(Account account, double amount) throws OperationException {
+    OperationResponse response = account.deposit(amount);
+    if (response.code() == OperationResponse.SUCCEED) {
+      return (Double) response.body();
+    }
+    if (response.code() == OperationResponse.INCORRECT_RESPONSE) {
+      System.err.println(response);
+    } else {
+      throw new OperationException(response);
+    }
+    return Double.NaN;
+  }
 }

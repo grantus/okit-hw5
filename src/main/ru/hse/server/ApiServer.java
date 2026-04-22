@@ -2,23 +2,29 @@ package ru.hse.server;
 
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import java.util.Collection;
+import java.util.LinkedList;
 import ru.hse.Account;
 import ru.hse.OperationException;
 import ru.hse.OperationResponse;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
+/** Exposes HTTP API for account registration, login, logout, and balance operations. */
 public class ApiServer {
   private static final String BAD_AUTH_MESSAGE = "Username и password обязательны";
   private static final String BAD_SESSION_MESSAGE =
-      "Произошла ошибка при разлогировании. Возможно номер сессии указан некорреткно "
+      "Произошла ошибка при разлогировании. Возможно номер сессии указан некорректно "
           + "или аккаунт/сессия не существуют";
 
   private final AccountServer server;
   private final Javalin app;
   private final LinkedList<IAccountAuthListener> listenerList = new LinkedList<>();
 
+  /**
+   * Creates API server and starts it on the specified port.
+   *
+   * @param server account server
+   * @param port server port
+   */
   public ApiServer(AccountServer server, int port) {
     this.server = server;
     this.app = Javalin.create(config -> {}).start(port);
@@ -27,18 +33,36 @@ public class ApiServer {
     System.out.println("Server is running on http://localhost:" + port);
   }
 
-  public synchronized boolean addAuthListener(IAccountAuthListener list) {
-    return listenerList.add(list);
+  /**
+   * Adds authentication listener.
+   *
+   * @param listener listener to add
+   * @return {@code true} if listener was added
+   */
+  public synchronized boolean addAuthListener(IAccountAuthListener listener) {
+    return listenerList.add(listener);
   }
 
-  public synchronized boolean removeAuthListener(IAccountAuthListener list) {
-    return listenerList.remove(list);
+  /**
+   * Removes authentication listener.
+   *
+   * @param listener listener to remove
+   * @return {@code true} if listener was removed
+   */
+  public synchronized boolean removeAuthListener(IAccountAuthListener listener) {
+    return listenerList.remove(listener);
   }
 
+  /**
+   * Returns current authentication listeners.
+   *
+   * @return copy of listener collection
+   */
   public synchronized Collection<IAccountAuthListener> getAuthListeners() {
     return new LinkedList<>(listenerList);
   }
 
+  /** Stops underlying HTTP server. */
   public void stop() {
     app.stop();
   }
@@ -62,14 +86,17 @@ public class ApiServer {
 
   private void handleRegister(Context ctx) {
     AuthRequest req = ctx.bodyAsClass(AuthRequest.class);
-    if (isValidAuthRequest(req)) {
-      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_AUTH_MESSAGE).toResultString());
+    if (!isValidAuthRequest(req)) {
+      ctx.result(
+          new OperationResponse(OperationResponse.NOT_LOGGED, BAD_AUTH_MESSAGE).toResultString());
       return;
     }
 
     try {
       Account account = server.register(req.login, req.password);
-      ctx.result(new OperationResponse(OperationResponse.SUCCEED, account.getActiveSession()).toResultString());
+      ctx.result(
+          new OperationResponse(OperationResponse.SUCCEED, account.getActiveSession())
+              .toResultString());
     } catch (OperationException e) {
       ctx.result(e.toResultString());
     }
@@ -77,8 +104,9 @@ public class ApiServer {
 
   private void handleLogin(Context ctx) {
     AuthRequest req = ctx.bodyAsClass(AuthRequest.class);
-    if (isValidAuthRequest(req)) {
-      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_AUTH_MESSAGE).toResultString());
+    if (!isValidAuthRequest(req)) {
+      ctx.result(
+          new OperationResponse(OperationResponse.NOT_LOGGED, BAD_AUTH_MESSAGE).toResultString());
       return;
     }
 
@@ -87,7 +115,9 @@ public class ApiServer {
       for (IAccountAuthListener listener : getAuthListeners()) {
         listener.accountLogin(req.login);
       }
-      ctx.result(new OperationResponse(OperationResponse.SUCCEED, account.getActiveSession()).toResultString());
+      ctx.result(
+          new OperationResponse(OperationResponse.SUCCEED, account.getActiveSession())
+              .toResultString());
     } catch (OperationException e) {
       ctx.result(e.toResultString());
     }
@@ -96,13 +126,15 @@ public class ApiServer {
   private void handleLogout(Context ctx) {
     LoggedRequest req = ctx.bodyAsClass(LoggedRequest.class);
     try {
-      Account acc = server.testSession(req.login, req.session);
-      if (acc == null) {
-        ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE).toResultString());
+      Account account = server.testSession(req.login, req.session);
+      if (account == null) {
+        ctx.result(
+            new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE)
+                .toResultString());
         return;
       }
 
-      server.logout(acc);
+      server.logout(account);
       for (IAccountAuthListener listener : getAuthListeners()) {
         listener.accountLogout(req.login);
       }
@@ -119,38 +151,44 @@ public class ApiServer {
 
   private void handleWithdraw(Context ctx) {
     LoggedRequestDouble req = ctx.bodyAsClass(LoggedRequestDouble.class);
-    Account acc = server.testSession(req.login, req.session);
-    if (acc == null) {
-      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE).toResultString());
+    Account account = server.testSession(req.login, req.session);
+    if (account == null) {
+      ctx.result(
+          new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE)
+              .toResultString());
       return;
     }
 
-    OperationResponse res = acc.withdraw(req.amount);
-    ctx.result(res.toResultString());
+    OperationResponse response = account.withdraw(req.amount);
+    ctx.result(response.toResultString());
   }
 
   private void handleDeposit(Context ctx) {
     LoggedRequestDouble req = ctx.bodyAsClass(LoggedRequestDouble.class);
-    Account acc = server.testSession(req.login, req.session);
-    if (acc == null) {
-      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE).toResultString());
+    Account account = server.testSession(req.login, req.session);
+    if (account == null) {
+      ctx.result(
+          new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE)
+              .toResultString());
       return;
     }
 
-    OperationResponse res = acc.deposit(req.amount);
-    ctx.result(res.toResultString());
+    OperationResponse response = account.deposit(req.amount);
+    ctx.result(response.toResultString());
   }
 
   private void handleBalance(Context ctx) {
     LoggedRequest req = ctx.bodyAsClass(LoggedRequest.class);
-    Account acc = server.testSession(req.login, req.session);
-    if (acc == null) {
-      ctx.result(new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE).toResultString());
+    Account account = server.testSession(req.login, req.session);
+    if (account == null) {
+      ctx.result(
+          new OperationResponse(OperationResponse.NOT_LOGGED, BAD_SESSION_MESSAGE)
+              .toResultString());
       return;
     }
 
-    OperationResponse res = acc.getBalance();
-    ctx.result(res.toResultString());
+    OperationResponse response = account.getBalance();
+    ctx.result(response.toResultString());
   }
 
   private boolean isValidAuthRequest(AuthRequest req) {
