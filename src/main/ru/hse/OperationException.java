@@ -4,8 +4,7 @@ import java.io.Serial;
 
 /** Exception wrapper for operation responses returned by account logic. */
 public class OperationException extends Exception {
-  @Serial
-  private static final long serialVersionUID = 1L;
+  @Serial private static final long serialVersionUID = 1L;
 
   public final OperationResponse response;
 

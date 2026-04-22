@@ -206,8 +206,7 @@ public class AccountServer {
             new OperationResponse(OperationResponse.INCORRECT_RESPONSE, body));
       }
     }
-    throw new OperationException(
-        new OperationResponse(OperationResponse.INCORRECT_RESPONSE, body));
+    throw new OperationException(new OperationResponse(OperationResponse.INCORRECT_RESPONSE, body));
   }
 
   private void logoutAllSafely() {

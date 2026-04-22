@@ -12,8 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 /** Represents result of account operation with optional payload. */
 public record OperationResponse(int code, Object body) implements Serializable {
-  @Serial
-  private static final long serialVersionUID = 1L;
+  @Serial private static final long serialVersionUID = 1L;
 
   private static final int MODE_STRING = 1;
   private static final int MODE_OBJECT = 2;
@@ -42,10 +41,8 @@ public record OperationResponse(int code, Object body) implements Serializable {
       new OperationResponse(NOT_LOGGED, null);
   public static final OperationResponse INCORRECT_SESSION_RESPONSE =
       new OperationResponse(INCORRECT_SESSION, null);
-  public static final OperationResponse SUCCEED_RESPONSE =
-      new OperationResponse(SUCCEED, null);
-  public static final OperationResponse NO_MONEY_RESPONSE =
-      new OperationResponse(NO_MONEY, null);
+  public static final OperationResponse SUCCEED_RESPONSE = new OperationResponse(SUCCEED, null);
+  public static final OperationResponse NO_MONEY_RESPONSE = new OperationResponse(NO_MONEY, null);
   public static final OperationResponse ENCODING_ERROR_RESPONSE =
       new OperationResponse(ENCODING_ERROR, null);
   public static final OperationResponse ALREADY_INITIATED_RESPONSE =
@@ -79,8 +76,7 @@ public record OperationResponse(int code, Object body) implements Serializable {
         }
       } else {
         return new OperationResponse(
-            INCORRECT_RESPONSE,
-            "Body is not serializable: " + body.getClass().getName())
+                INCORRECT_RESPONSE, "Body is not serializable: " + body.getClass().getName())
             .toResultString();
       }
     }
@@ -178,8 +174,7 @@ public record OperationResponse(int code, Object body) implements Serializable {
    */
   public static String responseToString(Serializable object) throws IOException {
     try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-         ObjectOutputStream objectOutputStream =
-             new ObjectOutputStream(byteArrayOutputStream)) {
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
       objectOutputStream.writeObject(object);
       objectOutputStream.flush();
       return Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
@@ -194,11 +189,10 @@ public record OperationResponse(int code, Object body) implements Serializable {
    * @throws IOException if deserialization fails
    * @throws ClassNotFoundException if class cannot be resolved
    */
-  public static Object responseFromString(String value)
-      throws IOException, ClassNotFoundException {
+  public static Object responseFromString(String value) throws IOException, ClassNotFoundException {
     byte[] data = Base64.getDecoder().decode(value);
     try (ObjectInputStream objectInputStream =
-             new ObjectInputStream(new ByteArrayInputStream(data))) {
+        new ObjectInputStream(new ByteArrayInputStream(data))) {
       return objectInputStream.readObject();
     }
   }

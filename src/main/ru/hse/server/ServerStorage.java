@@ -218,7 +218,7 @@ public final class ServerStorage
     String username = "SA";
 
     try (InputStream input =
-             Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
+        Thread.currentThread().getContextClassLoader().getResourceAsStream("db.properties")) {
       Properties prop = new Properties();
       if (input != null) {
         prop.load(input);
@@ -258,7 +258,7 @@ public final class ServerStorage
         """;
 
     try (Connection conn = source.getConnection();
-         Statement stmt = conn.createStatement()) {
+        Statement stmt = conn.createStatement()) {
       stmt.executeUpdate(createAccountsTable);
       stmt.executeUpdate(createSessionsTable);
     } catch (SQLException e) {

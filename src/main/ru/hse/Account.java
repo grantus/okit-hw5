@@ -44,9 +44,7 @@ public class Account {
     this.activeSession = session;
   }
 
-  /**
-   * Invalidates active session.
-   */
+  /** Invalidates active session. */
   public void invalidateSession() {
     this.activeSession = NO_SESSION;
   }

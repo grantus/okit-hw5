@@ -166,8 +166,10 @@ public final class AccountManager {
       }
     } else {
       return switch (response.code()) {
-        case OperationResponse.CONNECTION_ERROR, OperationResponse.UNDEFINED_ERROR,
-             OperationResponse.ALREADY_INITIATED -> response;
+        case OperationResponse.CONNECTION_ERROR,
+            OperationResponse.UNDEFINED_ERROR,
+            OperationResponse.ALREADY_INITIATED ->
+            response;
         default -> throw new IllegalStateException("Unexpected value: " + response.code());
       };
     }
@@ -204,10 +206,11 @@ public final class AccountManager {
     OperationResponse response = serverAuthData.logout(a.getLogin(), a.getActiveSession());
     return switch (response.code()) {
       case OperationResponse.SUCCEED,
-           OperationResponse.CONNECTION_ERROR,
-           OperationResponse.UNDEFINED_ERROR,
-           OperationResponse.NOT_LOGGED,
-           OperationResponse.INCORRECT_SESSION -> response;
+          OperationResponse.CONNECTION_ERROR,
+          OperationResponse.UNDEFINED_ERROR,
+          OperationResponse.NOT_LOGGED,
+          OperationResponse.INCORRECT_SESSION ->
+          response;
       default -> new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
     };
   }
