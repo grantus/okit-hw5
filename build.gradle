@@ -1,3 +1,5 @@
+import com.github.spotbugs.snom.SpotBugsTask
+
 plugins {
     id 'java'
     id 'application'
@@ -48,7 +50,7 @@ tasks.withType(Pmd).configureEach {
         xml.required = true
     }
 }
-tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach {
+tasks.withType(SpotBugsTask).configureEach {
     reports {
         html.required = true
         xml.required = true
@@ -70,6 +72,6 @@ application {
 }
 
 // Для удобного запуска через ./gradlew run
-tasks.withType(JavaExec) {
+tasks.withType(JavaExec).configureEach {
     standardInput = System.in
 }

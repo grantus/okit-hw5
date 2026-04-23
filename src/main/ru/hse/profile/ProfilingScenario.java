@@ -5,13 +5,21 @@ import ru.hse.OperationException;
 import ru.hse.client.Client;
 import ru.hse.server.Server;
 
+/** Runs single-threaded load scenario for server profiling. */
 public final class ProfilingScenario {
   private ProfilingScenario() {}
 
+  /**
+   * Starts server, runs load scenario, and stops server.
+   *
+   * @param args optional arguments: port, users, loops
+   * @throws Exception if startup or shutdown fails
+   */
   public static void main(String[] args) throws Exception {
     int port = args.length > 0 ? Integer.parseInt(args[0]) : 7080;
-    int users = args.length > 1 ? Integer.parseInt(args[1]) : 2000;
-    int loops = args.length > 2 ? Integer.parseInt(args[2]) : 300000;
+    int users = args.length > 1 ? Integer.parseInt(args[1]) : 1000;
+    int loops = args.length > 2 ? Integer.parseInt(args[2]) : 5000;
+    int logPeriod = 100;
 
     Server server = new Server();
     server.start(port);
@@ -22,10 +30,16 @@ public final class ProfilingScenario {
 
       for (int i = 0; i < users; i++) {
         runRegistrationScenario(client, i, i % 10 == 0);
+        if (i % logPeriod == 0) {
+          System.out.println("Registration loop iteration " + i);
+        }
       }
 
       for (int i = 0; i < loops; i++) {
         runLoginScenario(client, i % users, i % 25 == 0);
+        if (i % logPeriod == 0) {
+          System.out.println("Login loop iteration " + i);
+        }
       }
     } finally {
       server.stop();
@@ -73,16 +87,16 @@ public final class ProfilingScenario {
   private static void safeWithdraw(Account account, double amount) {
     try {
       Client.withdraw(account, amount);
-    } catch (OperationException ignored) {
-      // нагрузочный сценарий без assert
+    } catch (OperationException exception) {
+      // System.err.println("Withdraw failed during profiling: " + exception);
     }
   }
 
   private static void safeBadLogin(Client client, String login) {
     try {
       client.login(login, "wrong_password");
-    } catch (OperationException ignored) {
-      // важен сам факт неудачной авторизации
+    } catch (OperationException exception) {
+      // System.err.println("Expected bad login during profiling: " + exception);
     }
   }
 }

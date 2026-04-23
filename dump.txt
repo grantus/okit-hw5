@@ -1,0 +1,113 @@
+4:31:50 PM: Executing ':ru.hse.profile.ProfilingScenario.main()'…
+
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :ru.hse.profile.ProfilingScenario.main()
+[0.178s][info][jfr,startup] Started recording 1. No limit specified, using maxsize=250MB as default.
+[0.178s][info][jfr,startup]
+[0.178s][info][jfr,startup] Use jcmd 94264 JFR.dump name=1 to copy recording data to file.
+[0.185s][info][jfr,startup] Started recording 2. No limit specified, using maxsize=250MB as default.
+[0.185s][info][jfr,startup]
+[0.185s][info][jfr,startup] Use jcmd 94264 JFR.dump name=2 to copy recording data to file.
+Server is running on http://localhost:7080
+Registration loop iteration 0
+SLF4J(W): Class path contains multiple SLF4J providers.
+SLF4J(W): Found provider [org.slf4j.simple.SimpleServiceProvider@31d7b7bf]
+SLF4J(W): Found provider [ch.qos.logback.classic.spi.LogbackServiceProvider@635eaaf1]
+SLF4J(W): See https://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J(I): Actual provider is of type [org.slf4j.simple.SimpleServiceProvider@31d7b7bf]
+[main] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[main] INFO com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Driver does not support get/set network timeout for connections. (feature not supported)
+[main] INFO com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.hsqldb.jdbc.JDBCConnection@97e93f1
+[main] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[main] INFO io.javalin.Javalin - Starting Javalin ...
+[main] INFO org.eclipse.jetty.server.Server - jetty-11.0.25; built: 2025-03-13T00:15:57.301Z; git: a2e9fae3ad8320f2a713d4fa29bba356a99d1295; jvm 17.0.18+8
+[main] INFO org.eclipse.jetty.server.session.DefaultSessionIdManager - Session workerName=node0
+[main] INFO org.eclipse.jetty.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@2b43529a{/,null,AVAILABLE}
+[main] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@44e3a2b2{HTTP/1.1, (http/1.1)}{0.0.0.0:7080}
+[main] INFO org.eclipse.jetty.server.Server - Started Server@555cf22{STARTING}[11.0.25,sto=0] @444ms
+[main] INFO io.javalin.Javalin -
+       __                  ___           _____
+      / /___ __   ______ _/ (_)___      / ___/
+ __  / / __ `/ | / / __ `/ / / __ \    / __ \
+/ /_/ / /_/ /| |/ / /_/ / / / / / /   / /_/ /
+\____/\__,_/ |___/\__,_/_/_/_/ /_/    \____/
+
+       https://javalin.io/documentation
+
+[main] INFO io.javalin.Javalin - Javalin started in 72ms \o/
+[main] INFO io.javalin.Javalin - Listening on http://localhost:7080/
+[main] INFO io.javalin.Javalin - You are running Javalin 6.7.0 (released June 22, 2025. Your Javalin version is 304 days old. Consider checking for a newer version.).
+Registration loop iteration 100
+Registration loop iteration 200
+Registration loop iteration 300
+Registration loop iteration 400
+Registration loop iteration 500
+Registration loop iteration 600
+Registration loop iteration 700
+Registration loop iteration 800
+Registration loop iteration 900
+Login loop iteration 0
+Login loop iteration 100
+Login loop iteration 200
+Login loop iteration 300
+Login loop iteration 400
+Login loop iteration 500
+Login loop iteration 600
+Login loop iteration 700
+Login loop iteration 800
+Login loop iteration 900
+Login loop iteration 1000
+Login loop iteration 1100
+Login loop iteration 1200
+Login loop iteration 1300
+Login loop iteration 1400
+Login loop iteration 1500
+Login loop iteration 1600
+Login loop iteration 1700
+Login loop iteration 1800
+Login loop iteration 1900
+Login loop iteration 2000
+Login loop iteration 2100
+Login loop iteration 2200
+Login loop iteration 2300
+Login loop iteration 2400
+Login loop iteration 2500
+Login loop iteration 2600
+Login loop iteration 2700
+Login loop iteration 2800
+Login loop iteration 2900
+Login loop iteration 3000
+Login loop iteration 3100
+Login loop iteration 3200
+Login loop iteration 3300
+Login loop iteration 3400
+Login loop iteration 3500
+Login loop iteration 3600
+Login loop iteration 3700
+Login loop iteration 3800
+Login loop iteration 3900
+Login loop iteration 4000
+Login loop iteration 4100
+Login loop iteration 4200
+Login loop iteration 4300
+Login loop iteration 4400
+Login loop iteration 4500
+Login loop iteration 4600
+Login loop iteration 4700
+Login loop iteration 4800
+Login loop iteration 4900
+[main] INFO io.javalin.Javalin - Stopping Javalin ...
+[main] INFO org.eclipse.jetty.server.Server - Stopped Server@555cf22{STOPPING}[11.0.25,sto=0]
+[main] INFO org.eclipse.jetty.server.AbstractConnector - Stopped ServerConnector@44e3a2b2{HTTP/1.1, (http/1.1)}{0.0.0.0:7080}
+[main] INFO org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@2b43529a{/,null,STOPPED}
+[main] INFO io.javalin.Javalin - Javalin has stopped
+[main] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[main] INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+
+BUILD SUCCESSFUL in 6m 22s
+3 actionable tasks: 1 executed, 2 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.1.0/userguide/configuration_cache_enabling.html
+4:38:13 PM: Execution finished ':ru.hse.profile.ProfilingScenario.main()'.

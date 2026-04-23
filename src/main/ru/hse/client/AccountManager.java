@@ -152,28 +152,25 @@ public final class AccountManager {
 
   private OperationResponse callRegister(String login, String password) {
     OperationResponse response = serverAuthData.register(login, password);
+
     if (response.code() == OperationResponse.SUCCEED) {
       Object answer = response.body();
       if (answer instanceof Long id) {
-        try {
-          Account a = new Account(login);
-          a.setActiveSession(id);
-          a.initDataStorage(serverAccountsData);
-          return new OperationResponse(OperationResponse.SUCCEED, a);
-        } catch (NumberFormatException nfe) {
-          return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, nfe.getMessage());
-        }
+        Account account = new Account(login);
+        account.setActiveSession(id);
+        account.initDataStorage(serverAccountsData);
+        return new OperationResponse(OperationResponse.SUCCEED, account);
       }
-    } else {
-      return switch (response.code()) {
-        case OperationResponse.CONNECTION_ERROR,
-            OperationResponse.UNDEFINED_ERROR,
-            OperationResponse.ALREADY_INITIATED ->
-            response;
-        default -> throw new IllegalStateException("Unexpected value: " + response.code());
-      };
+      return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
     }
-    return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
+
+    return switch (response.code()) {
+      case OperationResponse.CONNECTION_ERROR,
+           OperationResponse.UNDEFINED_ERROR,
+           OperationResponse.ALREADY_INITIATED,
+           OperationResponse.ALREADY_LOGGED -> response;
+      default -> new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
+    };
   }
 
   private OperationResponse callLogin(String login, String password) {
@@ -181,11 +178,11 @@ public final class AccountManager {
     switch (response.code()) {
       case OperationResponse.SUCCEED:
         Object answer = response.body();
-        if (answer instanceof Long) {
-          Account a = new Account(login);
-          a.setActiveSession((Long) answer);
-          a.initDataStorage(serverAccountsData);
-          return new OperationResponse(OperationResponse.SUCCEED, a);
+        if (answer instanceof Long id) {
+          Account account = new Account(login);
+          account.setActiveSession(id);
+          account.initDataStorage(serverAccountsData);
+          return new OperationResponse(OperationResponse.SUCCEED, account);
         }
         break;
       case OperationResponse.CONNECTION_ERROR:
@@ -194,7 +191,7 @@ public final class AccountManager {
       case OperationResponse.ALREADY_LOGGED:
         return response;
       default:
-        throw new IllegalStateException("Unexpected value: " + response.code());
+        return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
     }
     return new OperationResponse(OperationResponse.INCORRECT_RESPONSE, response);
   }

@@ -4,25 +4,27 @@
 
 ### PMD report
 
-![Screenshot 2026-04-22 at 4.36.25 PM.png](pics/Screenshot%202026-04-22%20at%204.36.25%E2%80%AFPM.png)
+![pic-6.png](pics/pic-6.png)
 
 ### SpotBugs Report
 
-![Screenshot 2026-04-22 at 4.35.41 PM.png](pics/Screenshot%202026-04-22%20at%204.35.41%E2%80%AFPM.png)
-![Screenshot 2026-04-22 at 4.35.47 PM.png](pics/Screenshot%202026-04-22%20at%204.35.47%E2%80%AFPM.png)
-![Screenshot 2026-04-22 at 4.35.53 PM.png](pics/Screenshot%202026-04-22%20at%204.35.53%E2%80%AFPM.png)
-![Screenshot 2026-04-22 at 4.35.59 PM.png](pics/Screenshot%202026-04-22%20at%204.35.59%E2%80%AFPM.png)
-![Screenshot 2026-04-22 at 4.36.04 PM.png](pics/Screenshot%202026-04-22%20at%204.36.04%E2%80%AFPM.png)
+![pic-1.png](pics/pic-1.png)
+![pic-2.png](pics/pic-2.png)
+![pic-3.png](pics/pic-3.png)
+![pic-4.png](pics/pic-4.png)
+![pic-5.png](pics/pic-5.png)
+
 
 ## Reports после исправлений
 
 ### PMD report
 
-![Screenshot 2026-04-22 at 8.57.36 PM.png](pics/Screenshot%202026-04-22%20at%208.57.36%E2%80%AFPM.png)
+![pic-7.png](pics/pic-7.png)
 
 ### SpotBugs Report
-![Screenshot 2026-04-22 at 8.58.00 PM.png](pics/Screenshot%202026-04-22%20at%208.58.00%E2%80%AFPM.png)
-![Screenshot 2026-04-22 at 8.58.04 PM.png](pics/Screenshot%202026-04-22%20at%208.58.04%E2%80%AFPM.png)
+
+![pic-8.png](pics/pic-8.png)
+![pic-9.png](pics/pic-9.png)
 
 # 2. Провести манипуляции с плагинами для OpenIDE
 
@@ -30,11 +32,49 @@
 
 Метод с самой большой когнитивной сложностью был найден в файле [OperationResponse.java](src/main/ru/hse/OperationResponse.java):
 
-![Screenshot 2026-04-22 at 10.50.21 PM.png](pics/Screenshot%202026-04-22%20at%2010.50.21%E2%80%AFPM.png)
+![pic-10.png](pics/pic-10.png)
 
 ### Перевести проект на google стиль java кода
 
 Скриншот файла [AccountManager.java](src/main/ru/hse/client/AccountManager.java) после перевода на google стиль:
 
-![Screenshot 2026-04-22 at 11.47.56 PM.png](pics/Screenshot%202026-04-22%20at%2011.47.56%E2%80%AFPM.png)
+![pic-11.png](pics/pic-11.png)
 
+# 3. Профилирование — провести профилирование с предварительной разработкой класса для проверки реализации 
+
+## 3.1.
+
+Схема "создать аккаунт, положить на счет 100, снять 200, снять 50, для некоторых аккаунтов пробовать неудачно 
+авторизоваться" продублирована на 1 поток на 5000 прогонов (300000 прогонов заняли бы 5 часов по моим подсчетам)). 
+Результат прогонов в файле [dump.txt](dump.txt).
+
+## 3.2.
+
+Ниже скриншоты результатов профилирования для объектов `ru.hse.*`, вкладка Memory:
+
+![pic-12.png](pics/pic-12.png)
+
+![pic-13.png](pics/pic-13.png)
+
+![pic-14.png](pics/pic-14.png)
+
+![pic-15.png](pics/pic-15.png)
+
+![pic-16.png](pics/pic-16.png)
+
+![pic-17.png](pics/pic-17.png)
+
+![pic-18.png](pics/pic-18.png)
+
+Видно, что у всех объектов график в виде "пилы", значит, после выделения память регулярно освобождается. Таким образом, 
+явных признаков утечки памяти среди объектов пакета ru.hse не обнаружено.
+
+![pic-19.png](pics/pic-19.png)
+
+![pic-21.png](pics/pic-21.png)
+
+![pic-20.png](pics/pic-20.png)
+
+Выше скриншоты вкладок Threads и Socket I/O. На вкладке Threads неконтролируемого роста пользовательских 
+потоков не наблюдается. На вкладке Socket I/O видно, что нагрузочный сценарий действительно выполнялся через локальные 
+HTTP-запросы к серверу на порту 7080.
