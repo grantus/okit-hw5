@@ -2,6 +2,8 @@
 
 ## Reports до исправлений в коде
 
+Файлы лежат в папке [before_reports](before_reports).
+
 ### PMD report
 
 ![pic-6.png](pics/pic-6.png)
@@ -16,6 +18,8 @@
 
 
 ## Reports после исправлений
+
+Файлы лежат в папке [after_reports](after_reports).
 
 ### PMD report
 
